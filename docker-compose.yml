@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  daga-session-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7200:7200"

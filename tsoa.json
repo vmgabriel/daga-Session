@@ -1,0 +1,22 @@
+{
+	"swagger": {
+		"outputDirectory": ".",
+		"entryFile": "./src/index.ts",
+    "tags":  [
+      {
+        "name": "User",
+        "description": "Operations about users",
+        "externalDocs": {
+          "description": "Find out more about users",
+          "url": "http://swagger.io"
+        }
+      }
+    ]
+	},
+	"routes": {
+		"basePath": "/",
+		"entryFile": "./src/index.ts",
+		"routesDir": "./src",
+    "authenticationModule": "./src/authentication.ts"
+	}
+}
