@@ -1,22 +1,14 @@
 {
-	"swagger": {
-		"outputDirectory": ".",
-		"entryFile": "./src/index.ts",
-    "tags":  [
-      {
-        "name": "User",
-        "description": "Operations about users",
-        "externalDocs": {
-          "description": "Find out more about users",
-          "url": "http://swagger.io"
-        }
-      }
-    ]
-	},
-	"routes": {
-		"basePath": "/",
-		"entryFile": "./src/index.ts",
-		"routesDir": "./src",
-    "authenticationModule": "./src/authentication.ts"
-	}
+    "entryFile": "src/index.ts",
+    "compilerOptions": {
+        "resolveJsonModule": true
+    },
+    "spec": {
+        "outputDirectory": "src/routes/",
+        "specVersion": 3
+    },
+    "routes": {
+        "routesDir": "src/routes/",
+        "middleware": "express"
+    }
 }

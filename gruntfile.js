@@ -61,8 +61,7 @@ module.exports = grunt => {
   grunt.registerTask("default", [
     "ts",
     "tslint",
-    "typedoc",
-    "obfuscator"
+    "typedoc"
   ]);
 
   // END GRUNT

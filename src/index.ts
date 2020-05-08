@@ -3,10 +3,11 @@
 // Use Libraries
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
 import * as helmet from 'helmet';
 import * as dotenv from 'dotenv';
-import * as swaggerUi from 'swagger-ui-express';
 import * as cors from 'cors';
+// import * as methodOverride from 'method-override';
 
 // Configuration for NODE_ENV
 import envalid from './utils/env';
@@ -14,15 +15,41 @@ import envalid from './utils/env';
 // Constants
 import config from './config';
 
+// Auth
+import auth from './utils/auth';
+
+// Verify Connection
+import dbConnect from './utils/db/couch';
+
+// Configuration of Routes
+import { RouteBase } from './routes/route';
+import { IndexRoutes } from './routes';
+import { AuthRoutes } from './routes/auth';
+import { ModuleRoutes } from './routes/module';
+
+// Middleware of Output
+import { notFound } from './utils/middlewares/not-found';
+import {
+  logErrors,
+  wrapErrors,
+  clientErrorHandler,
+  errorhandler
+} from './utils/middlewares/error-handlers';
+
+
 /** Server Class Init */
 class Server {
-  public app: express.Application;
+  public app: express.Express;
   private env: any;
   private corsOptions: cors.CorsOptions;
+
+  // Routes Class
+  private routes: Array<RouteBase>;
 
   constructor() {
     // Create Express Application
     this.app = express();
+    dbConnect.initialize();
 
     // Validate Environment
     this.env = envalid;
@@ -33,18 +60,56 @@ class Server {
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
     };
 
+    // Initialize Routes
+    this.routes = [
+      new IndexRoutes(),
+      new AuthRoutes(),
+      new ModuleRoutes()
+    ];
+
     // Configuration of server
     this.config();
+
+    // Activate Routes
+    this.router();
+
+    // control Errors and Output Data
+    this.exitProcess();
   }
 
   /** Configuration Method of Server */
   private config() {
     dotenv.config();
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser(config.cookieSecret));
     this.app.use(helmet());
     this.app.use(cors(this.corsOptions));
+    // this.app.use(methodOverride());
 
-    this.app.set('port', config.port || 7200)
+    this.app.use(auth.initialize());
+
+    this.app.set('port', config.port || 7200);
+  }
+
+  /**
+   *  Configure the routes of my app
+   */
+  private router() {
+    // Swagger Docs
+
+    //this.app.use(`${this.router[0]['uri']}`, this.router[0]['router']);
+    for (let route of this.routes) {
+      this.app.use(`${route.uri}`, route.router);
+    }
+  }
+
+  /** Method that control process of exit in middleware of service  */
+  private exitProcess() {
+    this.app.use(notFound);
+    this.app.use(logErrors);
+    this.app.use(wrapErrors);
+    this.app.use(errorhandler);
+    this.app.use(clientErrorHandler);
   }
 
   /**
@@ -53,7 +118,6 @@ class Server {
    */
   public open(isSecure: boolean = false) {
     let server: any;
-
     if (isSecure) {
       server = true;
     } else {
@@ -65,6 +129,7 @@ class Server {
         });
       });
     }
+    // End Method Open
   }
 
   // End Class Server

@@ -13,7 +13,18 @@ dotenv.config();
 const env = envalid.cleanEnv(process.env, {
   PORT: envalid.port(),
 
-  USE_HTTPS: envalid.bool()
+  USE_HTTPS: envalid.bool(),
+  JWT_SECRET: envalid.str(),
+  COOKIE_SECRET: envalid.str(),
+
+  nameDocumentDevelop: envalid.str(),
+  nameDocumentProduction: envalid.str(),
+  nameDocumentTest: envalid.str(),
+
+  HOST_DB: envalid.host(),
+  PORT_DB: envalid.port(),
+  USER_DB: envalid.str(),
+  PASS_DB: envalid.str()
 });
 
 export default env;

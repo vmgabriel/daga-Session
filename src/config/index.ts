@@ -6,9 +6,21 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
-  dev: process.env.NODE_ENV !== "production",
+  dev: process.env.NODE_ENV,
   port: process.env.PORT,
-  isHttps: process.env.USE_HTTPS
+  isHttps: process.env.USE_HTTPS,
+
+  nameDocDev: process.env.nameDocumentDevelop,
+  nameDocProd: process.env.nameDocumentProduction,
+  nameDocTest: process.env.nameDocumentTest,
+
+  jwtSecret: process.env.JWT_SECRET,
+  cookieSecret: process.env.COOKIE_SECRET,
+
+  hostDb: process.env.HOST_DB,
+  portDb: process.env.PORT_DB,
+  userDb: process.env.USER_DB,
+  passDb: process.env.PASS_DB
 };
 
 export default config;
