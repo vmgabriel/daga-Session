@@ -94,12 +94,28 @@ export class CouchLib {
    */
   private toValidateValid(validation: IFilter): string {
     const toValueValid = (value: any, type: string, initial: string = '') => {
+      const formatDate = 'YYYY-MM-DD HH:mm:ss';
+      if (type.toLowerCase() == 'between') {
+        if (typeof value == 'number') {
+          return `${value[0]} AND ${value[1]}`
+        } else {
+          return `'${moment(value).format(formatDate)}'
+                     AND
+                 '${moment(value).format(formatDate)}'`;
+        }
+      }
       switch(typeof value) {
         case 'string':
           if (type == 'date') {
-            return `'${moment(value).format()}'`;
+            return `'${moment(value).format(formatDate)}'`;
           } else {
             return `'${initial}${value}${initial}'`;
+          }
+        case 'object':
+          if (Array.isArray(value)) {
+            return `[${value.toString()}]`
+          } else {
+            return JSON.stringify(value);
           }
         case 'number':
         default:

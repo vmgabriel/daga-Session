@@ -24,7 +24,9 @@ const env = envalid.cleanEnv(process.env, {
   HOST_DB: envalid.host(),
   PORT_DB: envalid.port(),
   USER_DB: envalid.str(),
-  PASS_DB: envalid.str()
+  PASS_DB: envalid.str(),
+
+  COOKIE_NAME: envalid.str()
 });
 
 export default env;

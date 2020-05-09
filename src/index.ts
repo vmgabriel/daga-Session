@@ -17,6 +17,7 @@ import config from './config';
 
 // Auth
 import auth from './utils/auth';
+import authClient from './utils/middlewares/validation';
 
 // Verify Connection
 import dbConnect from './utils/db/couch';
@@ -43,6 +44,9 @@ class Server {
   private env: any;
   private corsOptions: cors.CorsOptions;
 
+  private indexRoute: RouteBase;
+  private loginRoute: AuthRoutes;
+
   // Routes Class
   private routes: Array<RouteBase>;
 
@@ -62,10 +66,10 @@ class Server {
 
     // Initialize Routes
     this.routes = [
-      new IndexRoutes(),
-      new AuthRoutes(),
       new ModuleRoutes()
     ];
+    this.indexRoute = new IndexRoutes();
+    this.loginRoute = new AuthRoutes();
 
     // Configuration of server
     this.config();
@@ -96,8 +100,11 @@ class Server {
    */
   private router() {
     // Swagger Docs
+    this.app.use(`${this.indexRoute.uri}`, this.indexRoute.router);
+    this.app.use(`${this.loginRoute. uri}`, this.loginRoute.router);
 
-    //this.app.use(`${this.router[0]['uri']}`, this.router[0]['router']);
+    this.app.use(authClient);
+
     for (let route of this.routes) {
       this.app.use(`${route.uri}`, route.router);
     }

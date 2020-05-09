@@ -3,6 +3,7 @@
 // Libraries
 const joi = require('@hapi/joi');
 
+/** Class for Filter Model  */
 export class FilterModel {
 
   private attributesSchema: object;
@@ -32,13 +33,19 @@ export class FilterModel {
     });
   }
 
+  /** Get Schema for filter Attributes  */
   public getFilterAttributesScheme(): any {
     return {
       attribute: this.filterAttributesSchema
     };
   }
 
+  /** Get Filter Schema  */
   public getFilterScheme(): any {
-    return this.filterSchema;
+    return {
+      filter : this.filterSchema.required()
+    }
   }
+
+  // End Class
 }

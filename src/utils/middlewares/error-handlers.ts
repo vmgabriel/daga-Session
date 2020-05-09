@@ -59,9 +59,10 @@ export function wrapErrors(
   req: Request,
   res: Response,
   next: NextFunction) {
-  if (!err.isBoom) {
+  if (err.hasOwnProperty('isBoom')) {
     next(boom.badImplementation(err));
   }
+
   next(err);
 }
 
@@ -78,9 +79,12 @@ export function errorhandler(
   req: Request,
   res: Response,
   next: NextFunction) {
-  const { output: { statusCode, payload } } = err;
-  res.status(statusCode);
-  res.json(withErrorStack(payload, err.stack));
+  if (err.hasOwnProperty('output')) {
+    const { output: { statusCode, payload } } = err;
+    res.status(statusCode);
+    res.json(withErrorStack(payload, err.stack));
+  }
+  next(err);
 }
 
 /**

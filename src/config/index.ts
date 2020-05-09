@@ -20,7 +20,9 @@ const config = {
   hostDb: process.env.HOST_DB,
   portDb: process.env.PORT_DB,
   userDb: process.env.USER_DB,
-  passDb: process.env.PASS_DB
+  passDb: process.env.PASS_DB,
+
+  cookieName: process.env.COOKIE_NAME
 };
 
 export default config;

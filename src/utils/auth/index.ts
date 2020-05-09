@@ -18,9 +18,26 @@ class AuthStrategy {
 
   /** Define strategies  */
   public initialize() {
-    passport.use(new cookieStrategy(this.strategyCookie));
+    passport.use(new cookieStrategy({
+      cookieName: config.cookieName,
+      signed: true,
+      passReqToCallback: true
+    }, this.strategyCookie));
     return passport.initialize();
   }
+
+  /**
+   * Get Authenticate Strategy
+   * @param callback callback
+   **/
+  public authenticate = (callback: any) =>
+    passport.authenticate(
+      'cookie', {
+        session: false,
+        failWithError: true
+      },
+      callback
+    );
 
   /** get Token  */
   private genToken () {
@@ -54,7 +71,7 @@ class AuthStrategy {
       };
       res
         .status(200)
-        .cookie('auth', this.genToken(), options)
+        .cookie(config.cookieName, this.genToken(), options)
         .send({ code: 200, message: 'Data Correctly' });
     } catch (err) {
       console.log(err);
@@ -67,8 +84,9 @@ class AuthStrategy {
    * @param token Token defined
    * @param done Done Defined
    */
-  public strategyCookie (token: any, done: any) {
+  public strategyCookie (req: any, token: any, done: any) {
     console.log('token -', token);
+    console.log('req -', req);
     return (err: any, user: any) => {
       if (err) { return done(err); }
       // if (!user) { return done(null, false); }

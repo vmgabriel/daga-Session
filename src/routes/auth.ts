@@ -17,6 +17,7 @@ export class AuthRoutes extends RouteBase {
   /** Configuration of Routes  */
   protected config() {
     this.generateLogin();
+    this.generateAuth();
   }
 
   /** Route of Login  */
@@ -27,4 +28,31 @@ export class AuthRoutes extends RouteBase {
       next: NextFunction
     ) => auth.login(req, res, next));
   }
+
+  /** Route of Login  */
+  public generateAuth() {
+    this.router.post('/validate', (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      // if (req.path.includes(process.env.API_BASE + 'login')) return next();
+
+      return auth.authenticate((err: any, user: any, info: any) => {
+        if (err) { return next(err); }
+        if (!user) {
+          if (info.name === 'TokenExpiredError') {
+            return res.status(401).json({
+              message: 'Your token has expired. Please generate a new one'
+            });
+          } else {
+            return res.status(401).json({ message: info.message });
+          }
+        }
+        return next();
+      })(req, res, next);
+    });
+  }
+
+  // End Class
 }
