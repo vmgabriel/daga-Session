@@ -307,14 +307,5 @@ export class CouchLib {
     return this.updateOne(collection, attributeState, dataToUpdate, id);
   }
 
-  // public deleteOne(id: string): Promise<any> {
-  //   return new Promise((resolve: any, reject: any) => {
-  //     this.connect.remove(id, (err, res: any) => {
-  //       if (!!err) { reject(err); }
-  //       resolve(res);
-  //     });
-  //   });
-  // }
-
   // End Class CouchLib
 }

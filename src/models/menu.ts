@@ -37,20 +37,20 @@ export class ModuleModel extends AbstractModel {
   /** get Scheme Created  */
   public getCreateScheme(): any {
     return {
-      name: this.moduleNameSchema.required(),
-      description: this.moduleDescriptionSchema.required(),
-      link: this.moduleLinkSchema.required(),
-      permission: this.modulePermissionSchema.required()
+      moduleName: this.moduleNameSchema.required(),
+      moduleDescription: this.moduleDescriptionSchema.required(),
+      moduleLink: this.moduleLinkSchema.required(),
+      modulePermission: this.modulePermissionSchema.required()
     };
   }
 
   /** get Scheme Updated  */
   public getUpdateScheme() {
     return {
-      name: this.moduleNameSchema,
-      description: this.moduleDescriptionSchema,
-      link: this.moduleLinkSchema,
-      permission: this.modulePermissionSchema
+      moduleName: this.moduleNameSchema,
+      moduleDescription: this.moduleDescriptionSchema,
+      moduleLink: this.moduleLinkSchema,
+      modulePermission: this.modulePermissionSchema
     };
   }
 

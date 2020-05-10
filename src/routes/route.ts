@@ -1,4 +1,3 @@
-
 // Develop vmgabriel
 
 // Libraries
@@ -9,22 +8,30 @@ import { AbstractService } from '../services/abstract';
 import { AbstractModel } from '../models/abstract';
 
 // Validators
-import { validationHandler } from '../utils/validations/menuHandler';
+import { validationHandler } from '../utils/validations/validatorHandler';
+
+// Routes
+import { FilterModel } from '../models/filter';
 
 /** Router base Initial Configuration  */
 export abstract class RouteBase {
+  protected filterModel: FilterModel;
 
   /**
    * Get Data Express Router and Uri
-   * @param router Express Router defined for routes
-   * @param uri route base
+   * @param router Router for Data
+   * @param uri Url to Connect
+   * @param model Model generated for validata Data
+   * @param service Service for connect
    */
   constructor(
     public router: Router,
     public uri: string,
-    private model?: AbstractModel,
-    private service?: AbstractService
-  ) {}
+    protected model?: AbstractModel,
+    protected service?: AbstractService
+  ) {
+    this.filterModel = new FilterModel();
+  }
 
   protected abstract config(): void;
 
@@ -57,7 +64,15 @@ export abstract class RouteBase {
 
   /** Route of Post Filter Data By Content Filter  */
   protected filter() {
-    this.router.post('/filter', async (req: Request, res: Response, next: NextFunction) => {
+    this.router.post(
+      '/filter',
+      validationHandler(this.filterModel.getFilterAttributesScheme),
+      validationHandler(this.filterModel.getFilterScheme),
+      async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+      ) => {
       try {
         const data = await this.service.filter(req.body.attributes, req.body.filter);
         res.status(200).send(data);
