@@ -4,7 +4,7 @@
 import { AbstractService } from './abstract';
 
 // Model Service
-import { ModuleModel } from '../models/menu';
+import { ModuleModel } from '../models/module';
 
 /** Module Service  */
 export class ModuleService extends AbstractService {

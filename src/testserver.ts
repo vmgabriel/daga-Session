@@ -7,6 +7,10 @@ import { ModuleRoutes } from './routes/module';
 
 import { RouteBase } from './routes/route';
 
+/**
+ * Data for test server
+ * @param datas data row
+ */
 export function testServer(datas: Array<RouteBase>) {
 
   const app = express();

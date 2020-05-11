@@ -136,19 +136,34 @@ export const moduleMock = [
   }
 ];
 
-export function filterById(id: string) {
-  return R.filter((data: any) => data['meta']['id'] == id, moduleMock);
-}
+// /**
+//  * Filter Mock module by Id
+//  * @param id id to get
+//  */
+// export function filterById(id: string) {
+//   return R.filter((data: any) => data['meta']['id'] === id, moduleMock);
+// }
 
+/** Service module  */
 export class ModuleServiceMock {
+  /** Get All data of mocjs  */
   async getAll() {
     return Promise.resolve(moduleMock);
   }
 
+  /**
+   * Insert one Data on Mock
+   * @param data Data to Get
+   */
   async insertOne(data: any) {
     return Promise.resolve(moduleMock[0]);
   }
 
+  /**
+   * Update One Data on Mock
+   * @param data Data to Update
+   * @param id id to update
+   */
   async updateOne(data: any, id: string) {
     return Promise.resolve(moduleMock[0]);
   }

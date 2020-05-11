@@ -5,7 +5,6 @@ const joi = require('@hapi/joi');
 
 /** Class for Filter Model  */
 export class FilterModel {
-
   private attributesSchema: object;
   private filterItemSchema: object;
   private filterAttributesSchema: any;
@@ -43,8 +42,8 @@ export class FilterModel {
   /** Get Filter Schema  */
   public getFilterScheme(): any {
     return {
-      filter : this.filterSchema.required()
-    }
+      filter: this.filterSchema.required()
+    };
   }
 
   // End Class

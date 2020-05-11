@@ -74,13 +74,13 @@ export abstract class AbstractService {
           message: reason
         };
 
-        if (status == 'sucess') {
+        if (status === 'sucess') {
           message.code = 200;
           delete message.message;
         }
 
         resolve(message);
-      } catch(err) {
+      } catch (err) {
         reject(err);
       }
     });
@@ -100,7 +100,7 @@ export abstract class AbstractService {
     offset: number = 0) {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const {query, count}: IResponseFilterDb = await this.connection.filter(
+        const { query, count }: IResponseFilterDb = await this.connection.filter(
           this.collection,
           this.attributeState,
           attributes,
@@ -117,7 +117,7 @@ export abstract class AbstractService {
         };
 
         resolve(message);
-      } catch(err) {
+      } catch (err) {
         reject(err);
       }
     });
@@ -139,10 +139,10 @@ export abstract class AbstractService {
           code: 201,
           rows: query,
           message: 'Create Correctly'
-        }
+        };
 
         resolve(message);
-      } catch(err) {
+      } catch (err) {
         reject(err);
       }
     });
@@ -154,7 +154,7 @@ export abstract class AbstractService {
    * @param data data to update
    */
   public update(id: string, data: any) {
-    return new Promise(async (resolve,reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
         const { query, status, reason } = await this.connection.updateOne(
           this.collection,
@@ -162,15 +162,17 @@ export abstract class AbstractService {
           data,
           id
         );
-        if (status == 'sucess') {
+
+        if (status === 'sucess') {
           const message = {
             code: 200,
             rows: query,
             message: 'Update Correctly'
-          }
+          };
+
           resolve(message);
         } else {
-          resolve({ code: 400, message: reason })
+          resolve({ code: 400, message: reason });
         }
       } catch (err) {
         reject(err);
@@ -190,12 +192,13 @@ export abstract class AbstractService {
           id,
           this.attributeState
         );
-        if (status == 'failed') {
-          resolve({ code: 400, message: reason })
+
+        if (status === 'failed') {
+          resolve({ code: 400, message: reason });
         } else {
           resolve({ code: 200, message: 'Delete Correctly', rows: query });
         }
-      } catch(err) {
+      } catch (err) {
         reject(err);
       }
     });

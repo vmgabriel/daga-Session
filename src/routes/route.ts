@@ -33,6 +33,7 @@ export abstract class RouteBase {
     this.filterModel = new FilterModel();
   }
 
+  /** Configuration of selected routes  */
   protected abstract config(): void;
 
   /** Route of get All data */
@@ -41,7 +42,7 @@ export abstract class RouteBase {
       try {
         const data = await this.service.getAll();
         res.status(200).send(data);
-      } catch(err) {
+      } catch (err) {
         next(err);
       }
     });
@@ -56,7 +57,7 @@ export abstract class RouteBase {
       try {
         const data = await this.service.getOne(req.params.id);
         res.status(200).send(data);
-      } catch(err) {
+      } catch (err) {
         next(err);
       }
     });
@@ -76,7 +77,7 @@ export abstract class RouteBase {
       try {
         const data = await this.service.filter(req.body.attributes, req.body.filter);
         res.status(200).send(data);
-      } catch(err) {
+      } catch (err) {
         next(err);
       }
     });
@@ -91,7 +92,7 @@ export abstract class RouteBase {
         try {
           const data = await this.service.create(req.body);
           res.status(201).send(data);
-        } catch(err) {
+        } catch (err) {
           next(err);
         }
       }
@@ -108,7 +109,7 @@ export abstract class RouteBase {
       try {
         const data = await this.service.update(req.params.id, req.body);
         res.status(200).send(data);
-      } catch(err) {
+      } catch (err) {
         next(err);
       }
     });
@@ -123,7 +124,7 @@ export abstract class RouteBase {
       try {
         const data = await this.service.delete(req.params.id);
         res.status(200).send(data);
-      } catch(err) {
+      } catch (err) {
         next(err);
       }
     });

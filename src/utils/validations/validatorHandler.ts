@@ -20,10 +20,10 @@ export function validate(data: any, schema: any) {
  * @param schema Schema data
  * @param check check data schema
  */
-export function validationHandler(schema: any, check = 'body') {
+export function validationHandler(schema: any, check: string  = 'body'): any {
   return function(req: Request, res: Response, next: NextFunction) {
     const error = validate(req[check], schema);
 
     error ? next(boom.badRequest(error)) : next();
-  }
+  };
 }

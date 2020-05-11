@@ -18,7 +18,7 @@ import config from '../../config';
  * @param stack stack in Matery
  */
 function withErrorStack(err: Array<any>, stack: any) {
-  switch(config.dev.toLowerCase()) {
+  switch (config.dev.toLowerCase()) {
     case 'dev':
     case 'develop':
     case 'development':

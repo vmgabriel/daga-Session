@@ -54,7 +54,7 @@ class CouchConnection {
   /** get Name of Bucket, change if dev change */
   public getNameBucket(): string {
     let bucketName: string;
-    switch(config.dev.toLowerCase()) {
+    switch (config.dev.toLowerCase()) {
       case 'production':
         bucketName = config.nameDocProd;
         break;
@@ -88,7 +88,7 @@ class CouchConnection {
   }
 
   // End Class
-};
+}
 
 const couchConnection = new CouchConnection();
 export default couchConnection;

@@ -4,17 +4,12 @@ import * as passport from 'passport';
 import * as jwt from 'jwt-simple';
 import * as cookieStrategy from 'passport-cookie';
 import * as moment from 'moment';
-import * as expressValidator from 'express-validator';
 
 // Configuration
 import config from '../../config';
 
 /** Auth Strategies of Connection  */
 class AuthStrategy {
-
-  /** Define Strateties  */
-  constructor() {
-  }
 
   /** Define strategies  */
   public initialize() {
@@ -30,14 +25,15 @@ class AuthStrategy {
    * Get Authenticate Strategy
    * @param callback callback
    **/
-  public authenticate = (callback: any) =>
-    passport.authenticate(
+  public authenticate = (callback: any) => {
+    return passport.authenticate(
       'cookie', {
         session: false,
         failWithError: true
       },
       callback
     );
+  }
 
   /** get Token  */
   private genToken () {
@@ -57,11 +53,14 @@ class AuthStrategy {
    */
   public login(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
-      expressValidator.body('username').notEmpty();
-      expressValidator.body('password').notEmpty();
-
-      let errors = expressValidator.validationResult(req);
-      if (!errors['errors']) { throw errors['errors']; }
+      if (
+        req.body.hasOwnProperty('username')
+          || req.body.hasOwnProperty('password')
+          || req.body.username === ''
+          || req.body.password === ''
+         ) {
+        throw Error('[Error] - User or Password not found');
+      }
 
       const options = {
         maxAge: 1000 * 60 * 15, // 15 minutes
@@ -92,7 +91,8 @@ class AuthStrategy {
       // if (!user) { return done(null, false); }
       return done(null, { user: 'usuario', data: 'data', usuario: user });
     };
-  };
+  }
+
   // End Class
 }
 

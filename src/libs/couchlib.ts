@@ -18,7 +18,7 @@ import { IAttributeChange, IAndOrFilter, IFilter } from '../interfaces/filter';
 
 /** Couch Lib for query and connection  */
 export class CouchLib {
-  private N1q1Query: any;
+  private n1q1Query: any;
   private connect: couchbase.Bucket;
   private bucketName: string;
 
@@ -29,7 +29,7 @@ export class CouchLib {
 
     this.connect = connection.bucket;
     this.bucketName = connection.getNameBucket();
-    this.N1q1Query = couchbase.N1qlQuery;
+    this.n1q1Query = couchbase.N1qlQuery;
 
     this.attributeBase = 't.*, META(t).id';
   }
@@ -41,8 +41,9 @@ export class CouchLib {
   public getCount(queryData: string): Promise<number> {
     const query = `SELECT count(d) count FROM (${queryData}) d`;
     console.log(query);
-    const n1Query = this.N1q1Query.fromString(query);
-    return new Promise((resolve: any,reject: any) => {
+    const n1Query = this.n1q1Query.fromString(query);
+
+    return new Promise((resolve: any, reject: any) => {
       this.connect.query(n1Query, (err: any, data: any) => {
         if (!!err) { reject(err); }
         const [{ count }] = data;
@@ -67,7 +68,7 @@ export class CouchLib {
       `SELECT ${this.attributeBase}
        FROM ${this.bucketName} t
        WHERE type='${collection}' AND t.${attributeState} = true`;
-    const n1Query = this.N1q1Query.fromString(
+    const n1Query = this.n1q1Query.fromString(
        query + ` LIMIT ${limit} OFFSET ${offset}`
     );
     return new Promise((resolve: any, reject: any) => {
@@ -95,25 +96,25 @@ export class CouchLib {
   private toValidateValid(validation: IFilter): string {
     const toValueValid = (value: any, type: string, initial: string = '') => {
       const formatDate = 'YYYY-MM-DD HH:mm:ss';
-      if (type.toLowerCase() == 'between') {
-        if (typeof value == 'number') {
-          return `${value[0]} AND ${value[1]}`
+      if (type.toLowerCase() === 'between') {
+        if (typeof value === 'number') {
+          return `${value[0]} AND ${value[1]}`;
         } else {
           return `'${moment(value).format(formatDate)}'
                      AND
                  '${moment(value).format(formatDate)}'`;
         }
       }
-      switch(typeof value) {
+      switch (typeof value) {
         case 'string':
-          if (type == 'date') {
+          if (type === 'date') {
             return `'${moment(value).format(formatDate)}'`;
           } else {
             return `'${initial}${value}${initial}'`;
           }
         case 'object':
           if (Array.isArray(value)) {
-            return `[${value.toString()}]`
+            return `[${value.toString()}]`;
           } else {
             return JSON.stringify(value);
           }
@@ -124,7 +125,7 @@ export class CouchLib {
     };
 
     const toConditionValid = (condition: string, value: any, type: string) => {
-      switch(condition.toLowerCase()) {
+      switch (condition.toLowerCase()) {
         case 'like':
           return `${condition.toUpperCase()} ${toValueValid(value, type, `%`)}`;
         case '=':
@@ -173,9 +174,9 @@ export class CouchLib {
       data += this.toCompareValid(filters.and, 'AND');
       data += ' ' + filters.condition + ' ';
       data += this.toCompareValid(filters.or, 'OR');
-    } else if(!!filters.and) {
+    } else if (!!filters.and) {
       data += this.toCompareValid(filters.and, 'AND');
-    } else if(!!filters.or) {
+    } else if (!!filters.or) {
       data += this.toCompareValid(filters.or, 'OR');
     }
     return data;
@@ -203,11 +204,11 @@ export class CouchLib {
        WHERE type='${collection}' AND t.${attributeState} = true`
     ;
     const filt = this.toFilterValid(filter);
-    if (filt != '') {
+    if (filt !== '') {
       query += ` AND ${filt}`;
     }
 
-    const n1Query = this.N1q1Query.fromString(
+    const n1Query = this.n1q1Query.fromString(
       query + ` LIMIT ${limit} OFFSET ${offset}`
     );
     return new Promise((resolve: any, reject: any) => {
@@ -224,21 +225,25 @@ export class CouchLib {
    * @param attributeState attribute to filter if exist data
    * @param id id to get
    */
-  public getOne(collection: string, attributeState: string, id: string): Promise<IResponseFilterDb> {
+  public getOne(
+    collection: string,
+    attributeState: string,
+    id: string
+  ): Promise<IResponseFilterDb> {
     const query =
       `SELECT ${this.attributeBase}
        FROM ${this.bucketName} t
        WHERE type='${collection}' AND META(t).id='${id}' AND t.${attributeState} = true`;
-    const n1Query = this.N1q1Query.fromString(query);
+    const n1Query = this.n1q1Query.fromString(query);
 
     return new Promise((resolve: any, reject: any) => {
       this.connect.query(n1Query, (err: any, rows: Array<any>) => {
         if (!!err) { reject(err); }
 
-        if (rows.length == 0) {
+        if (rows.length === 0) {
           resolve({ query: [], status: 'failed', reason: 'data not exist' });
         } else {
-          resolve({ query: (rows.length == 1) ? rows[0] : [], status: 'sucess' });
+          resolve({ query: (rows.length === 1) ? rows[0] : [], status: 'sucess' });
         }
       });
     });
@@ -271,12 +276,17 @@ export class CouchLib {
    * @param data data to update
    * @param id id of data to update data
    */
-  public updateOne(collection: string, attributeState: string, data: any, id: string): Promise<IResponseFilterDb> {
+  public updateOne(
+    collection: string,
+    attributeState: string,
+    data: any,
+    id: string
+  ): Promise<IResponseFilterDb> {
     data.updatedAt = new Date();
     return new Promise(async (resolve: any, reject: any) => {
       let { query, status } = await this.getOne(collection, attributeState, id);
 
-      if (status == 'sucess') {
+      if (status === 'sucess') {
         delete query.id;
         this.connect.replace(id, { ...query, ...data }, (err: any, res: any) => {
           if (!!err) { reject(err); }

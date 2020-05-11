@@ -9,7 +9,7 @@ import { RouteBase } from './route';
 import { ModuleService } from '../services/module';
 
 // Import Model
-import { ModuleModel } from '../models/menu';
+import { ModuleModel } from '../models/module';
 
 /** Class for modules */
 export class ModuleRoutes extends RouteBase {

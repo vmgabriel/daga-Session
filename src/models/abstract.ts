@@ -2,7 +2,6 @@
 
 /** Abstract Model data  */
 export abstract class AbstractModel {
-  constructor() {}
 
   /** Schema for Create  */
   public abstract getCreateScheme(): any;
