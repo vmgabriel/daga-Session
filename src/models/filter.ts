@@ -6,17 +6,17 @@ const joi = require('@hapi/joi');
 /** Class for Filter Model  */
 export class FilterModel {
   private attributesSchema: object;
-  private filterItemSchema: object;
+  // private filterItemSchema: object;
   private filterAttributesSchema: any;
   private filterSchema: any;
 
   constructor() {
-    this.filterItemSchema = {
-      column: joi.string().min(2).max(40).required(),
-      op: joi.string().min(1).max(20).required(),
-      value: joi.any().empty().required(),
-      type: joi.string()
-    };
+    // this.filterItemSchema = {
+    //   column: joi.string().min(2).max(40).required(),
+    //   op: joi.string().min(1).max(20).required(),
+    //   value: joi.any().empty().required(),
+    //   type: joi.string()
+    // };
 
     this.attributesSchema = {
       column: joi.string().min(2).max(40).required(),
@@ -35,14 +35,22 @@ export class FilterModel {
   /** Get Schema for filter Attributes  */
   public getFilterAttributesScheme(): any {
     return {
-      attribute: this.filterAttributesSchema
+      attributes: this.filterAttributesSchema
     };
   }
 
   /** Get Filter Schema  */
   public getFilterScheme(): any {
     return {
-      filter: this.filterSchema.required()
+      filters: this.filterSchema
+    };
+  }
+
+  /** get Attributes and filter data  */
+  public getAttributeAndFilter(): any {
+    return {
+      attributes: this.filterAttributesSchema,
+      filters: this.filterSchema.required()
     };
   }
 

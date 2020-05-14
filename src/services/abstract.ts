@@ -12,7 +12,7 @@ import { IAttributeChange, IAndOrFilter } from '../interfaces/filter';
 
 /** Abstract Class  */
 export abstract class AbstractService {
-  private connection: CouchLib;
+  protected connection: CouchLib;
 
   /**
    * Get Abstract Service for common methods
@@ -21,7 +21,7 @@ export abstract class AbstractService {
   constructor(
     public collection: string,
     public schema: AbstractModel,
-    private attributeState: string
+    protected attributeState: string
   ) {
     this.connection = new CouchLib();
   }

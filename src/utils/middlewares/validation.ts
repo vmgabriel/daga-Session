@@ -6,6 +6,9 @@ import { Request, Response, NextFunction } from "express";
 // Constants
 import config from "../../config";
 
+// Authenticate
+import authStrategy from '../auth';
+
 /**
  * Auth Client Middlware
  * @param req
@@ -13,12 +16,11 @@ import config from "../../config";
  * @param next
  */
 const authClient = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.signedCookies || !req.signedCookies.hasOwnProperty('auth')) {
+  if (!req.signedCookies || !req.signedCookies[config.cookieName]) {
     next({ code: 403, message: 'auth not send', error: 'auth not send' });
   }
 
-  console.log('signed cookies', req.signedCookies);
-  next();
+  authStrategy.authenticate(req, res, next);
 };
 
 export default authClient;

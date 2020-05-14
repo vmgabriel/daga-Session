@@ -27,6 +27,7 @@ import { RouteBase } from './routes/route';
 import { IndexRoutes } from './routes';
 import { AuthRoutes } from './routes/auth';
 import { ModuleRoutes } from './routes/module';
+import { RoleRoutes } from './routes/role';
 
 // Middleware of Output
 import { notFound } from './utils/middlewares/not-found';
@@ -66,7 +67,8 @@ class Server {
 
     // Initialize Routes
     this.routes = [
-      new ModuleRoutes()
+      new ModuleRoutes(),
+      new RoleRoutes()
     ];
     this.indexRoute = new IndexRoutes();
     this.loginRoute = new AuthRoutes();
@@ -88,9 +90,9 @@ class Server {
     this.app.use(cookieParser(config.cookieSecret));
     this.app.use(helmet());
     this.app.use(cors(this.corsOptions));
-    // this.app.use(methodOverride());
-
+    //this.app.use(methodOverride());
     this.app.use(auth.initialize());
+
 
     this.app.set('port', config.port || 7200);
   }

@@ -6,6 +6,7 @@ export interface IFilter {
   op: string;
   value: any;
   type?: string;
+  isId?: true;
 }
 
 /** And or Data  */
@@ -19,4 +20,24 @@ export interface IAndOrFilter {
 export interface IAttributeChange {
   column: string;
   as: string;
+  name?: string;
+  isArray?: boolean;
+  inContent?: string;
+  comparation?: string;
+}
+
+/** Filter from  */
+export interface IFromFilterBase {
+  name: string;
+  joinType?: string;
+  unionType?: string;
+  onType?: string;
+  onValue?: string;
+  othersOnValue?: IAndOrFilter;
+  default: boolean;
+}
+
+/** Frm Filter  */
+export interface IFromFilter {
+  from: Array<IFromFilterBase>;
 }

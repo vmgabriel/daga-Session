@@ -9,7 +9,7 @@ import { ModuleModel } from '../models/module';
 /** Module Service  */
 export class ModuleService extends AbstractService {
   constructor() {
-    super('module', new ModuleModel(), 'moduleIsValidSchema');
+    super('module', new ModuleModel(), 'moduleIsValid');
   }
 
   // End Class

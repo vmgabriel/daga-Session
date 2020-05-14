@@ -67,20 +67,19 @@ export abstract class RouteBase {
   protected filter() {
     this.router.post(
       '/filter',
-      validationHandler(this.filterModel.getFilterAttributesScheme),
-      validationHandler(this.filterModel.getFilterScheme),
+      validationHandler(this.filterModel.getAttributeAndFilter()),
       async (
         req: Request,
         res: Response,
         next: NextFunction
       ) => {
-      try {
-        const data = await this.service.filter(req.body.attributes, req.body.filter);
-        res.status(200).send(data);
-      } catch (err) {
-        next(err);
-      }
-    });
+        try {
+          const data = await this.service.filter(req.body.attributes, req.body.filters);
+          res.status(200).send(data);
+        } catch (err) {
+          next(err);
+        }
+      });
   }
 
   /** Rooute of Post Create Register with data  */

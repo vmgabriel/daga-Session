@@ -22,7 +22,8 @@ const config = {
   userDb: process.env.USER_DB,
   passDb: process.env.PASS_DB,
 
-  cookieName: process.env.COOKIE_NAME
+  cookieName: process.env.COOKIE_NAME,
+  maxSession: process.env.MAXSESSIONBYUSER
 };
 
 export default config;
