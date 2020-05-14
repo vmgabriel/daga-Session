@@ -45,11 +45,11 @@
     "passport-local": "^1.0.0",
     "ramda": "^0.27.0",
     "tsoa": "^3.0.7",
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^15.0.3"
   },
     "devDependencies": {
-    "@hapi/boom": "^9.1.0",
-    "@hapi/joi": "^15.0.3",
     "@types/cookie-parser": "^1.4.2",
     "@types/method-override": "0.0.31",
     "@types/passport": "^1.0.3",
