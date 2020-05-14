@@ -52,7 +52,7 @@ RUN npm i --production
 COPY --from=build ${appDirBuild}/certificates ./certificates
 # RUN chown -R node:node ./certificates/* 
 # RUN chmod -R o+r ./certificates/www.*
-COPY --from=build ${appDirBuild}/dist/index.js ./dist/index.js
+COPY --from=build ${appDirBuild}/dist ./dist
 
 EXPOSE 7200
 CMD ["pm2", "start", "dist/index.js", "--no-daemon"]
