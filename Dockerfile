@@ -12,7 +12,7 @@ RUN mkdir -p /var/www/session-service
 COPY package.json /var/www/session-service
 COPY .env /var/www/session-service/
 COPY certificates/ /var/www/session-service/certificates/
-COPY tsconfig.json /var/www/session-service/ 
+COPY tsconfig.json /var/www/session-service/
 COPY gruntfile.js /var/www/session-service/gruntfile.js
 COPY tslint.json /var/www/session-service/tslint.json
 
@@ -48,9 +48,8 @@ COPY --from=build ${appDirBuild}/.env ${appDir}
 WORKDIR ${appDir}
 RUN npm i --production
 
-
 COPY --from=build ${appDirBuild}/certificates ./certificates
-# RUN chown -R node:node ./certificates/* 
+# RUN chown -R node:node ./certificates/*
 # RUN chmod -R o+r ./certificates/www.*
 COPY --from=build ${appDirBuild}/dist ./dist
 

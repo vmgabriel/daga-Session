@@ -25,14 +25,14 @@ module.exports = grunt => {
         }
       }
     },
-    tslint: {
-      options: {
-        configuration: "tslint.json"
-      },
-      files: {
-        src: ["src/\*\*/\*.ts"]
-      }
-    },
+    // tslint: {
+    //   options: {
+    //     configuration: "tslint.json"
+    //   },
+    //   files: {
+    //     src: ["src/\*\*/\*.ts"]
+    //   }
+    // },
     watch: {
       ts: {
         files: ["src/\*\*/\*.ts"],
@@ -55,12 +55,12 @@ module.exports = grunt => {
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-ts");
   grunt.registerTask("default", ["ts"]);
-  grunt.loadNpmTasks("grunt-tslint");
+  // grunt.loadNpmTasks("grunt-tslint");
   grunt.loadNpmTasks('grunt-typedoc');
 
   grunt.registerTask("default", [
     "ts",
-    "tslint",
+    // "tslint",
     "typedoc"
   ]);
 
