@@ -11,12 +11,6 @@ export class FilterModel {
   private filterSchema: any;
 
   constructor() {
-    // this.filterItemSchema = {
-    //   column: joi.string().min(2).max(40).required(),
-    //   op: joi.string().min(1).max(20).required(),
-    //   value: joi.any().empty().required(),
-    //   type: joi.string()
-    // };
 
     this.attributesSchema = {
       column: joi.string().min(2).max(40).required(),

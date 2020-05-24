@@ -2,8 +2,8 @@
 
 /** Response data Filter  */
 export interface IResponseFilterDb {
-  query: Array<any> | any;
+  query: Array<any> | any; // datos
   count?: Promise<number>;
-  status?: string;
-  reason?: string;
+  status?: string; // sucess - failed
+  reason?: string; // fdsfadfafdsfafa
 }

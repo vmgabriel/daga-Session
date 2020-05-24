@@ -3,17 +3,15 @@
 // Model Abstract
 import { AbstractModel } from '../models/abstract';
 
-// Librarie of Connection
-import { CouchLib } from '../libs/couchlib';
-
 // Interfaces
-import { IResponseFilterDb } from '../interfaces/db-response';
 import { IAttributeChange, IAndOrFilter } from '../interfaces/filter';
+import { IAbstract } from 'src/interfaces/abtract';
+
+// Repository
+import { MongoLib } from '../libs/mongolib';
 
 /** Abstract Class  */
 export abstract class AbstractService {
-  protected connection: CouchLib;
-
   /**
    * Get Abstract Service for common methods
    * @param collection Get name of Collection
@@ -21,31 +19,30 @@ export abstract class AbstractService {
   constructor(
     public collection: string,
     public schema: AbstractModel,
-    protected attributeState: string
-  ) {
-    this.connection = new CouchLib();
-  }
+    protected attributeState: string,
+    protected connection: MongoLib<IAbstract>
+  ) {}
 
   /**
    * Get All data
    * @param limit limit of datas
    * @param offset page of data
    */
-  public getAll(limit: number = 10, offset: number = 0): Promise<any> {
+  public getAll(
+    limit: number = 10,
+    offset: number = 0
+  ): Promise<{ code: number, count: number, rows: Array<IAbstract> }> {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const { query, count }: IResponseFilterDb = await this.connection.getAll(
-          this.collection,
-          this.attributeState,
+        const { rows, count } = await this.connection.getAll(
           limit,
           offset
         );
-        const length = await count;
 
         const message = {
           code: 200,
-          count: length,
-          rows: query
+          count,
+          rows
         };
 
         resolve(message);
@@ -59,24 +56,18 @@ export abstract class AbstractService {
    * Get One Data
    * @param id id of Data
    */
-  public getOne(id: string) {
+  public getOne(id: string | string): Promise<{ code: number, rows: Array<IAbstract> }> {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const { query, status, reason } = await this.connection.getOne(
-          this.collection,
-          this.attributeState,
-          id
-        );
+        const rows = await this.connection.getOne(id);
 
         let message = {
           code: 400,
-          row: query,
-          message: reason
+          rows
         };
 
-        if (status === 'sucess') {
+        if (!!rows) {
           message.code = 200;
-          delete message.message;
         }
 
         resolve(message);
@@ -100,20 +91,18 @@ export abstract class AbstractService {
     offset: number = 0) {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const { query, count }: IResponseFilterDb = await this.connection.filter(
-          this.collection,
-          this.attributeState,
+        const { rows, count } = await this.connection.filter(
           attributes,
           filter,
+          [],
           limit,
           offset
         );
-        const length = await count;
 
         const message = {
           code: 200,
-          count: length,
-          rows: query
+          count,
+          rows
         };
 
         resolve(message);
@@ -130,14 +119,12 @@ export abstract class AbstractService {
   public create(data: any) {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const { query } = await this.connection.insertOne(
-          this.collection,
-          this.attributeState,
+        const rows = await this.connection.create(
           data
         );
         const message = {
           code: 201,
-          rows: query,
+          rows,
           message: 'Create Correctly'
         };
 
@@ -153,26 +140,24 @@ export abstract class AbstractService {
    * @param id id of document to update
    * @param data data to update
    */
-  public update(id: string, data: any) {
+  public update(id: string | number, data: any) {
     return new Promise(async (resolve, reject) => {
       try {
-        const { query, status, reason } = await this.connection.updateOne(
-          this.collection,
-          this.attributeState,
-          data,
-          id
+        const rows = await this.connection.update(
+          id,
+          data
         );
 
-        if (status === 'sucess') {
+        if (!!rows) {
           const message = {
             code: 200,
-            rows: query,
+            rows,
             message: 'Update Correctly'
           };
 
           resolve(message);
         } else {
-          resolve({ code: 400, message: reason });
+          resolve({ code: 400, message: 'Data not Updated' });
         }
       } catch (err) {
         reject(err);
@@ -187,17 +172,12 @@ export abstract class AbstractService {
   public delete(id: string) {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const { query, status, reason } = await this.connection.deleteOne(
-          this.collection,
-          id,
-          this.attributeState
+        const rows = await this.connection.delete(
+          id
         );
 
-        if (status === 'failed') {
-          resolve({ code: 400, message: reason });
-        } else {
-          resolve({ code: 200, message: 'Delete Correctly', rows: query });
-        }
+        console.log('rows - ', rows);
+        resolve({ code: 200, message: 'Delete Correctly', rows });
       } catch (err) {
         reject(err);
       }

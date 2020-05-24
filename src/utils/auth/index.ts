@@ -57,14 +57,14 @@ class AuthStrategy {
     ) => {
       console.log('Hello new');
       try {
-        const { data, valid, sessionId } = await this.sessionService.compareSession({
-          sessionUserName: username,
-          sessionPassword: password
-        });
+        // const { data, valid, sessionId } = await this.sessionService.compareSession({
+        //   sessionUserName: username,
+        //   sessionPassword: password
+        // });
 
-        console.log("datos de la consulta - ", { data, valid, sessionId });
+        // console.log("datos de la consulta - ", { data, valid, sessionId });
 
-        return (valid) ? done(null, { data, sessionId }) : done(data);
+        // return (valid) ? done(null, { data, sessionId }) : done(data);
       } catch (error) {
         done(error);
       }
@@ -118,61 +118,61 @@ class AuthStrategy {
   public async login(req: express.Request, res: express.Response, next: express.NextFunction) {
     passport.authenticate('local', { session: false }, async (error, user) => {
       try {
-        if (error || !user) { res.status(400).json({ error }); }
+        // if (error || !user) { res.status(400).json({ error }); }
 
-        const options = {
-          maxAge: 1000 * 60 * 15, // 15 minutes
-          httpOnly: true,
-          signed: true// ,
-          //secure: true
-        };
+        // const options = {
+        //   maxAge: 1000 * 60 * 15, // 15 minutes
+        //   httpOnly: true,
+        //   signed: true// ,
+        //   //secure: true
+        // };
 
-        const {
-          row
-        } = await this.sessionService.getSessionComplete(user.sessionId);
+        // const {
+        //   row
+        // } = await this.sessionService.getSessionComplete(user.sessionId);
 
-        // #TODO: GET User data of service of user sync
+        // // #TODO: GET User data of service of user sync
 
-        const token = this.genToken(
-          req.connection.remoteAddress,
-          row[0].sessionUserName,
-          row[0].sessionRole,
-          user.sessionId
-        );
+        // const token = this.genToken(
+        //   req.connection.remoteAddress,
+        //   row[0].sessionUserName,
+        //   row[0].sessionRole,
+        //   user.sessionId
+        // );
 
-        // Create New BlackList
-        const blackListItem = {
-          blackListToken: token,
-          blackListIp: req.connection.remoteAddress,
-          blackListBrowser: req.headers['user-agent'],
-          blackListDateUse: new Date()
-        };
-        const blackCreated = await this.blackListService.create(blackListItem);
+        // // Create New BlackList
+        // const blackListItem = {
+        //   blackListToken: token,
+        //   blackListIp: req.connection.remoteAddress,
+        //   blackListBrowser: req.headers['user-agent'],
+        //   blackListDateUse: new Date()
+        // };
+        // const blackCreated = await this.blackListService.create(blackListItem);
 
-        // load Strategie for Authenticate
-        const strategieResolve = await this.strategyAuthentication(
-          blackListItem.blackListIp,
-          user.sessionId,
-          blackListItem.blackListBrowser,
-          blackCreated,
-          row[0].blacklists
-        );
+        // // load Strategie for Authenticate
+        // const strategieResolve = await this.strategyAuthentication(
+        //   blackListItem.blackListIp,
+        //   user.sessionId,
+        //   blackListItem.blackListBrowser,
+        //   blackCreated,
+        //   row[0].blacklists
+        // );
 
-        if (strategieResolve.code ===  409) {
-          res.status(409).json(strategieResolve);
-        }
+        // if (strategieResolve.code ===  409) {
+        //   res.status(409).json(strategieResolve);
+        // }
 
-        // Append to List the new Item
-        row[0].blacklists.push(blackListItem);
+        // // Append to List the new Item
+        // row[0].blacklists.push(blackListItem);
 
-        R.forEach((data: any) => delete data.blackListToken, row[0].blacklists);
+        // R.forEach((data: any) => delete data.blackListToken, row[0].blacklists);
 
-        console.log("token - ", token);
+        // console.log("token - ", token);
 
-        res
-          .status(200)
-          .cookie(config.cookieName, token, options)
-          .send({ code: 200, message: 'Data Correctly', data: row[0] });
+        // res
+        //   .status(200)
+        //   .cookie(config.cookieName, token, options)
+        //   .send({ code: 200, message: 'Data Correctly', data: row[0] });
       } catch (err) {
         console.log('[Error login] - ', err);
         res.status(401).json({ "message": "Invalid credentials", "errors": err });
@@ -217,7 +217,7 @@ class AuthStrategy {
           // #TODO: report ACCESS INTO event
         }
         // Add new BlackList Item
-        await this.sessionService.reportNewAuth(idSession, newItem.rows.id);
+        //await this.sessionService.reportNewAuth(idSession, newItem.rows.id);
         resolve({ code: 200, message: 'token refresh' });
       } catch (err) {
         reject(err);

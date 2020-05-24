@@ -1,18 +1,19 @@
 // Develop vmgabriel
 
 // Interfaces
-import { IRole } from './role';
-import { IBlackList } from './blacklist';
+import { IAbstract } from './abtract';
+
+export const nameTable = 'session';
+export const stateName = 'sessionIsValid';
 
 /** Session Interface  */
-export interface ISession {
-  sessionId: string;
+export interface ISession extends IAbstract {
   sessionUserName: string;
   sessionPassword: string;
-  sessionRole: IRole; // Roles
+  sessionRole: string; // Roles
   sessionIsVerifyEmail: boolean;
   sessionIsValid: boolean;
-  sessionBlackList: Array<IBlackList>; //BlackList
+  sessionBlackList: Array<string>; //BlackList
 }
 
 export const attributesWithoutPass = [

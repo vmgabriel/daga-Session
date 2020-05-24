@@ -20,7 +20,7 @@ const authClient = (req: Request, res: Response, next: NextFunction) => {
     next({ code: 403, message: 'auth not send', error: 'auth not send' });
   }
 
-  authStrategy.authenticate(req, res, next);
+  // authStrategy.authenticate(req, res, next);
 };
 
 export default authClient;

@@ -3,7 +3,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 const boom = require('@hapi/boom');
-const joi = require('@hapi/joi');
+import Joi = require('@hapi/joi');
 
 /**
  * Validate Content of Joi
@@ -11,8 +11,9 @@ const joi = require('@hapi/joi');
  * @param schema Schem to do validation
  */
 export function validate(data: any, schema: any) {
-  const { error } = joi.validate(data, schema);
-  return error;
+  let result: Joi.ValidationResult;
+  result = Joi.object(schema).validate(data);
+  return result.error;
 }
 
 /**

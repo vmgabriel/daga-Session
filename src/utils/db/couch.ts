@@ -28,7 +28,7 @@ class CouchConnection {
     this.bucket = this.cluster.openBucket(this.getNameBucket(), this.errorConnection);
     this.bucket.on('connect', () => {
       console.log('[Database] - Conected Correcly');
-      this.isConnected = true;
+      this.isConnected = false;
     });
   }
 

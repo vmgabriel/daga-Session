@@ -20,7 +20,7 @@ import auth from './utils/auth';
 import authClient from './utils/middlewares/validation';
 
 // Verify Connection
-import dbConnect from './utils/db/couch';
+import dbConnect from './utils/db/mongo';
 
 // Configuration of Routes
 import { RouteBase } from './routes/route';
@@ -54,7 +54,7 @@ class Server {
   constructor() {
     // Create Express Application
     this.app = express();
-    dbConnect.initialize();
+    dbConnect.mongoConnect();
 
     // Validate Environment
     this.env = envalid;
@@ -105,7 +105,7 @@ class Server {
     this.app.use(`${this.indexRoute.uri}`, this.indexRoute.router);
     this.app.use(`${this.loginRoute. uri}`, this.loginRoute.router);
 
-    this.app.use(authClient);
+    // this.app.use(authClient);
 
     for (let route of this.routes) {
       this.app.use(`${route.uri}`, route.router);

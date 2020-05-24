@@ -6,6 +6,9 @@ const joi = require('@hapi/joi');
 // Models
 import { AbstractModel } from './abstract';
 
+// Interfaces
+import { nameTable as moduleTable } from '../interfaces/module';
+
 /** Role Model Base  */
 export class RoleModel extends AbstractModel {
   private permissions: Array<string>;
@@ -14,6 +17,7 @@ export class RoleModel extends AbstractModel {
   private roleNameSchema: any;
   private roleDescriptionSchema: any;
   private rolePermissionSchema: any;
+  private roleisValid: any;
 
   constructor() {
     super();
@@ -29,16 +33,18 @@ export class RoleModel extends AbstractModel {
     this.roleNameSchema = joi.string().max(80);
     this.roleDescriptionSchema = joi.string().max(200);
     this.rolePermissionSchema = joi.array().items(joi.object({
-      roleModuleId: joi.string(),
+      roleModuleId: joi.string().meta({ _mongoose: { type: 'ObjectId', ref: moduleTable } }),
       roleModulePermission: joi.array().items(joi.string().valid(...this.permissions)).unique()
     }));
+    this.roleisValid = joi.boolean();
   }
 
   /** get Scheme Created  */
   public getCreateScheme(): any {
     return {
       roleName: this.roleNameSchema.required(),
-      roleDescription: this.roleDescriptionSchema.required()
+      roleDescription: this.roleDescriptionSchema.required(),
+      roleModules: this.rolePermissionSchema
     };
   }
 
@@ -46,7 +52,19 @@ export class RoleModel extends AbstractModel {
   public getUpdateScheme() {
     return {
       roleName: this.roleNameSchema,
-      roleDescription: this.roleDescriptionSchema
+      roleDescription: this.roleDescriptionSchema,
+      roleModules: this.rolePermissionSchema
+    };
+  }
+
+  /** Get Data for sabe into database  */
+  public getData() {
+    return {
+      roleName: this.roleNameSchema.required(),
+      roleDescription: this.roleDescriptionSchema.required(),
+      roleisValid: this.roleisValid.required(),
+      roleModules: this.rolePermissionSchema,
+      deletedAt: this.deletedAt
     };
   }
 

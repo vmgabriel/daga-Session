@@ -1,13 +1,15 @@
 // Develop vmgabriel
 
 // Interfaces
-import { IModule } from './module';
+import { IAbstract } from './abtract';
+
+export const nameTable = 'rol';
+export const stateName = 'roleIsValid';
 
 /** Role Interface  */
-export interface IRole {
-  roleId: string;
+export interface IRole extends IAbstract {
   roleName: string;
   roleDescription: string;
-  roleModules: Array<IModule>;
+  roleModules?: Array<{ rolemoduleId: string, roleModulePermission: Array<string> }>;
   roleIsValid: boolean;
 }
