@@ -56,10 +56,10 @@ export class SessionModel extends AbstractModel {
     return {
       sessionUserName: this.sessionUserNameSchema.required(),
       sessionPassword: this.sessionPasswordSchema.required(),
-      sessionRoleSchema: this.sessionRoleSchema.required(),
+      sessionRole: this.sessionRoleSchema.required(),
       sessionIsVerifyEmailSchema: this.sessionIsVerifyEmailSchema.required(),
-      sessionIsValidSchema: this.sessionIsValidSchema.required(),
-      sessionBlackListSchema: this.sessionBlackListSchema,
+      sessionIsValid: this.sessionIsValidSchema.required(),
+      sessionBlackList: this.sessionBlackListSchema,
       deletedAt: this.deletedAt
     };
   }

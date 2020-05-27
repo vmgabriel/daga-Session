@@ -1,6 +1,6 @@
 // Develop vmgabrieñ
 
-/** Abstract */
+/** Abstract Interface Base */
 export interface IAbstract {
   _id?: string | number;
   id?: string | number;

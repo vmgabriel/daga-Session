@@ -5,6 +5,9 @@ import { Request, Response, NextFunction } from 'express';
 const boom = require('@hapi/boom');
 import Joi = require('@hapi/joi');
 
+// Interfaces
+import { IErrorCustom } from '../../interfaces/error-custom';
+
 /**
  * Validate Content of Joi
  * @param data Data for joi Content
@@ -22,9 +25,12 @@ export function validate(data: any, schema: any) {
  * @param check check data schema
  */
 export function validationHandler(schema: any, check: string  = 'body'): any {
-  return function(req: Request, res: Response, next: NextFunction) {
-    const error = validate(req[check], schema);
-
-    error ? next(boom.badRequest(error)) : next();
+  return function(err: IErrorCustom, req: Request, res: Response, next: NextFunction) {
+    if (!!err) {
+      next(err);
+    } else {
+      const error = validate(req[check], schema);
+      error ? next(boom.badRequest(error)) : next();
+    }
   };
 }

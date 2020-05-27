@@ -1,5 +1,8 @@
 // Develop vmgabriel
 
+// Libraries
+import * as R from 'ramda';
+
 // Connection
 import { MongoLib } from '../../mongolib';
 
@@ -7,47 +10,67 @@ import { MongoLib } from '../../mongolib';
 import { SessionModel } from '../../../models/session';
 
 // interfaces
-import { ISession, nameTable, stateName } from '../../../interfaces/session';
-import { IAttributeChange, IAndOrFilter, IFromFilterBase } from 'src/interfaces/filter';
+import {
+  ISession,
+  nameTable,
+  stateName,
+  foreignNameBlackList,
+  foreignNameRole,
+  attributesWithoutPass
+} from '../../../interfaces/session';
+import { IAttributeChange, IAndOrFilter, IFromFilterBase } from '../../../interfaces/filter';
+import { foreignRoleModule, foreignRoleModuleId } from '../../../interfaces/role';
 
 // - Repositories
 import { SessionRepo } from '../../../interfaces/repositories/sessionRepo';
 
 // Compare Password
-import { encrypt, compare } from '../../../utils/auth/passwordAuth';
+import { compare } from '../../../utils/auth/passwordAuth';
 
-export class SessionMongoRepository extends MongoLib<ISession> implements SessionRepo{
+/** Repository Session  */
+export class SessionMongoRepository extends MongoLib<ISession> implements SessionRepo {
   constructor() {
     super(nameTable, stateName, new SessionModel());
   }
 
-  public count(query: any): Promise<number> { return super.count(query); }
-
-  public async create(data: any): Promise<ISession> {
-    try {
-      data.sessionPassword = await encrypt(data.sessionPassword);
-      return super.create(data);
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  public update(
-    id: string | number,
-    data: any
-  ): Promise<ISession> { return super.update(id, data) }
-
-  public delete(id: string | number): Promise<ISession> { return super.delete(id); }
-
-  public getOne(id: string | number): Promise<ISession> { return super.getOne(id); }
-
+  /**
+   * Get All Data
+   * @param limit Limit of datas
+   * @param offset Skip datas
+   */
   public getAll(
     limit: number,
     offset: number
   ): Promise<{ rows: Array<ISession>, count: number }> {
-    return super.getAll(limit, offset);
+    return new Promise(async (resolve: any, reject: any) => {
+      try {
+        let query = this.model.find();
+        query.populate(foreignNameBlackList);
+        query.populate({
+          path: foreignNameRole,
+          populate: { path: foreignRoleModule + '.' + foreignRoleModuleId }
+        });
+
+        R.forEach((data: any) => query.select(data.column), attributesWithoutPass);
+
+        const count = this.count(this.model.find());
+        query.skip(limit * offset);
+        query.limit(limit);
+        resolve({ rows: await query, count: await count });
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 
+  /**
+   * Get data filtered
+   * @param attributes attributes to get
+   * @param filters filters to put into query
+   * @param joins joins data
+   * @param limit limit of datas
+   * @param offset skip data
+   */
   public filter(
     attributes: Array<IAttributeChange>,
     filters: IAndOrFilter,
@@ -55,9 +78,62 @@ export class SessionMongoRepository extends MongoLib<ISession> implements Sessio
     limit: number = 10,
     offset: number = 0
   ): Promise<{ rows: Array<ISession>, count: number }> {
-    return super.filter(attributes, filters, joins, limit, offset);
+    return new Promise(async (resolve: any, reject: any) => {
+      try {
+        const dataFilter = `{ ${this.buildFilters(filters)} }`;
+        const query = this.model.find(JSON.parse(dataFilter));
+        query.populate(foreignNameBlackList);
+        query.populate({
+            path: foreignNameRole,
+            populate: { path: foreignRoleModule + '.' + foreignRoleModuleId }
+        });
+
+        if (attributes.length > 0) {
+          R.forEach((data: any) => query.select(data.column), attributes);
+        } else {
+          R.forEach((data: any) => query.select(data.column), attributesWithoutPass);
+        }
+
+        const count = this.count(this.model.find(JSON.parse(dataFilter)));
+        query.skip(offset * limit);
+        query.limit(limit);
+
+        resolve({ rows: await query, count: await count });
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 
+  /**
+   * get One data of database
+   * @param id Id of Rows
+   */
+  public getOne(id: string | number): Promise<ISession> {
+    return new Promise(async (resolve: any, reject: any) => {
+      try {
+        const idStr = '' + id;
+        const query = this.model.findOne({ _id: idStr })
+          .populate(foreignNameBlackList)
+          .populate({
+            path: foreignNameRole,
+            populate: { path: foreignRoleModule + '.' + foreignRoleModuleId }
+          })
+        ;
+
+        R.forEach((d: any) => query.select(d.column), attributesWithoutPass);
+
+        resolve(await query);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  /**
+   * Compare Session with data
+   * @param dataSession Session to compare
+   */
   public compareSession(
     dataSession: Partial<ISession>
   ): Promise<{ data: string, valid: boolean, session: any }> {
@@ -101,21 +177,6 @@ export class SessionMongoRepository extends MongoLib<ISession> implements Sessio
         ;
 
         resolve(message);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  public addNewItemToArray(
-    id: string | number,
-    attributeName: string,
-    value: any
-  ): Promise<ISession> {
-    return new Promise(async (resolve: any, reject: any) => {
-      try {
-        const data = super.reportNewAuth(id, attributeName, value);
-        resolve(await data);
       } catch (err) {
         reject(err);
       }

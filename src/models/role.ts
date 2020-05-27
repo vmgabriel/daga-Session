@@ -18,6 +18,7 @@ export class RoleModel extends AbstractModel {
   private roleDescriptionSchema: any;
   private rolePermissionSchema: any;
   private roleisValid: any;
+  private roleModuleSchema: any;
 
   constructor() {
     super();
@@ -26,16 +27,21 @@ export class RoleModel extends AbstractModel {
       'show',
       'edit',
       'create',
-      'delete'
+      'delete',
+      'show me',
+      'edit me',
+      'create me',
+      'delete me'
     ];
 
+    this.roleModuleSchema = {
+      roleModuleId: joi.string().meta({ _mongoose: { type: 'ObjectId', ref: moduleTable } }),
+      roleModulePermission: joi.array().items(joi.string().valid(...this.permissions)).unique()
+    };
     this.roleId = joi.string();
     this.roleNameSchema = joi.string().max(80);
     this.roleDescriptionSchema = joi.string().max(200);
-    this.rolePermissionSchema = joi.array().items(joi.object({
-      roleModuleId: joi.string().meta({ _mongoose: { type: 'ObjectId', ref: moduleTable } }),
-      roleModulePermission: joi.array().items(joi.string().valid(...this.permissions)).unique()
-    }));
+    this.rolePermissionSchema = joi.array().items(joi.object(this.roleModuleSchema)).default([]);
     this.roleisValid = joi.boolean();
   }
 
@@ -62,10 +68,15 @@ export class RoleModel extends AbstractModel {
     return {
       roleName: this.roleNameSchema.required(),
       roleDescription: this.roleDescriptionSchema.required(),
-      roleisValid: this.roleisValid.required(),
+      roleIsValid: this.roleisValid.required(),
       roleModules: this.rolePermissionSchema,
       deletedAt: this.deletedAt
     };
+  }
+
+  /** get Role Module for Role */
+  public getRoleModule() {
+    return this.roleModuleSchema;
   }
 
   /** get Id Scheme  */

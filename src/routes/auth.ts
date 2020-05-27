@@ -12,13 +12,18 @@ import { RouteBase } from './route';
 
 // Auth Model
 import { SessionModel } from '../models/session';
+import { ISession, nameTable } from "../interfaces/session";
 
 /** Route for Auth  */
-export class AuthRoutes extends RouteBase {
+export class AuthRoutes extends RouteBase<ISession> {
   private sessionModel: SessionModel;
   /** Initialize data  */
   constructor() {
-    super(Router(), '/api/v0/auth/');
+    super(
+      Router(),
+      '/api/v0/auth/',
+      nameTable
+    );
 
     this.sessionModel = new SessionModel();
 

@@ -4,16 +4,23 @@ import * as express from "express";
 // Base router Dependency
 import { RouteBase } from './route';
 
+// Interfaces
+import { IAbstract } from "../interfaces/abtract";
+
 /**
  * Route base
  **/
-export class IndexRoutes extends RouteBase {
+export class IndexRoutes extends RouteBase<IAbstract> {
 
   /**
    * Extends RouteApi with super construct and put uri
    **/
   constructor() {
-    super(express.Router(), '/api/v0/');
+    super(
+      express.Router(),
+      '/api/v0/',
+      ''
+    );
 
     this.config();
   }

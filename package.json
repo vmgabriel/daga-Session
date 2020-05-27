@@ -20,7 +20,7 @@
     "role"
   ],
   "author": "vmgabriel, dbgroldan",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@hapi/boom": "^9.1.0",
     "@hapi/joi": "^17.1.1",
@@ -28,7 +28,6 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "couchbase": "^2.6.12",
     "dotenv": "^8.2.0",
     "envalid": "^6.0.1",
     "express": "^4.17.1",
@@ -41,12 +40,9 @@
     "mongoose": "^5.9.15",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-cookie": "^1.0.6",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "ramda": "^0.27.0",
-    "tsoa": "^3.0.8",
-    "uuid": "^8.1.0"
+    "ramda": "^0.27.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

@@ -5,13 +5,13 @@ import { AbstractModel } from '../models/abstract';
 
 // Interfaces
 import { IAttributeChange, IAndOrFilter } from '../interfaces/filter';
-import { IAbstract } from 'src/interfaces/abtract';
+import { IAbstract } from '../interfaces/abtract';
 
 // Repository
 import { MongoLib } from '../libs/mongolib';
 
 /** Abstract Class  */
-export abstract class AbstractService {
+export abstract class AbstractService<T> {
   /**
    * Get Abstract Service for common methods
    * @param collection Get name of Collection
@@ -31,7 +31,7 @@ export abstract class AbstractService {
   public getAll(
     limit: number = 10,
     offset: number = 0
-  ): Promise<{ code: number, count: number, rows: Array<IAbstract> }> {
+  ): Promise<{ code: number, count: number, rows: Array<T> }> {
     return new Promise(async (resolve: any, reject: any) => {
       try {
         const { rows, count } = await this.connection.getAll(
@@ -56,7 +56,7 @@ export abstract class AbstractService {
    * Get One Data
    * @param id id of Data
    */
-  public getOne(id: string | string): Promise<{ code: number, rows: Array<IAbstract> }> {
+  public getOne(id: string | string): Promise<{ code: number, rows: T }> {
     return new Promise(async (resolve: any, reject: any) => {
       try {
         const rows = await this.connection.getOne(id);

@@ -7,59 +7,61 @@ import { MongoLib } from '../../mongolib';
 import { RoleModel } from '../../../models/role';
 
 // interfaces
-import { IRole, nameTable, stateName } from '../../../interfaces/role';
-import { IAttributeChange, IAndOrFilter, IFromFilterBase } from 'src/interfaces/filter';
+import {
+  IRole,
+  nameTable,
+  stateName,
+  foreignRoleModuleId,
+  foreignRoleModule  } from '../../../interfaces/role';
 
 // - Repositories
 import { RoleRepo } from '../../../interfaces/repositories/roleRepo';
 
+/** Repository of Role  */
 export class RoleMongoRepository extends MongoLib<IRole> implements RoleRepo {
   constructor() {
-    super(nameTable,
-          stateName,
-          new RoleModel()
-         );
+    super(
+      nameTable,
+      stateName,
+      new RoleModel()
+    );
   }
 
-  public count(query: any): Promise<number> { return super.count(query); }
+  /**
+   * Get One Data
+   * @param id Id of row to get
+   */
+  public getOne(id: string | number): Promise<IRole> {
+    return new Promise(async (resolve: any, reject: any) => {
+      try {
+        const idStr = '' + id;
+        const data = await this.model
+          .findOne({ _id: idStr })
+          .populate(foreignRoleModule + '.' + foreignRoleModuleId);
+        resolve(data);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
 
-  public create(data: any): Promise<IRole> { return super.create(data); }
-
-  public update(
-    id: string | number,
-    data: any
-  ): Promise<IRole> { return super.update(id, data) }
-
-  public delete(id: string | number): Promise<IRole> { return super.delete(id); }
-
-  public getOne(id: string | number): Promise<IRole> { return super.getOne(id); }
-
+  /**
+   * Get All data
+   * @param limit Limit of datas
+   * @param offset skip datas
+   */
   public getAll(
     limit: number,
     offset: number
   ): Promise<{ rows: Array<IRole>, count: number }> {
-    return super.getAll(limit, offset);
-  }
-
-  public filter(
-    attributes: Array<IAttributeChange>,
-    filters: IAndOrFilter,
-    joins: Array<IFromFilterBase>,
-    limit: number = 10,
-    offset: number = 0
-  ): Promise<{ rows: Array<IRole>, count: number }> {
-    return super.filter(attributes, filters, joins, limit, offset);
-  }
-
-  public addNewItemToArray(
-    id: string | number,
-    attributeName: string,
-    value: any
-  ): Promise<IRole> {
     return new Promise(async (resolve: any, reject: any) => {
       try {
-        const data = super.reportNewAuth(id, attributeName, value);
-        resolve(await data);
+        const query = this.model.find()
+        query.populate(foreignRoleModule + '.' + foreignRoleModuleId);
+        const count = this.count(this.model.find());
+        query.skip(limit * offset);
+        query.limit(limit);
+        resolve({ rows: await query, count: await count });
       } catch (err) {
         reject(err);
       }

@@ -6,7 +6,7 @@ const Joi = require('@hapi/joi');
 /** Abstract Model data  */
 export abstract class AbstractModel {
   protected deletedAt: any;
-  
+
   constructor() {
     this.deletedAt = Joi.date();
   }

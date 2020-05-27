@@ -6,12 +6,13 @@ import * as supertest from 'supertest';
 import { ModuleRoutes } from './routes/module';
 
 import { RouteBase } from './routes/route';
+import { IAbstract } from './interfaces/abtract';
 
 /**
  * Data for test server
  * @param datas data row
  */
-export function testServer(datas: Array<RouteBase>) {
+export function testServer(datas: Array<RouteBase<IAbstract>>) {
 
   const app = express();
 

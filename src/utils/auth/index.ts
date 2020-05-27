@@ -15,6 +15,11 @@ import config from '../../config';
 import { SessionService } from '../../services/session';
 import { BlackListService } from '../../services/blacklist';
 
+// Interfaces
+import { IBlackList } from '../../interfaces/blacklist';
+import { ISession } from '../../interfaces/session';
+import { IRoleModule } from '../../interfaces/role';
+
 /** Auth Strategies of Connection  */
 class AuthStrategy {
   private sessionService: SessionService;
@@ -55,16 +60,13 @@ class AuthStrategy {
       password: any,
       done : any
     ) => {
-      console.log('Hello new');
       try {
-        // const { data, valid, sessionId } = await this.sessionService.compareSession({
-        //   sessionUserName: username,
-        //   sessionPassword: password
-        // });
+        const { data, valid, sessionId } = await this.sessionService.compareSession({
+          sessionUserName: username,
+          sessionPassword: password
+        });
 
-        // console.log("datos de la consulta - ", { data, valid, sessionId });
-
-        // return (valid) ? done(null, { data, sessionId }) : done(data);
+        return (valid) ? done(null, { data, sessionId }) : done(data);
       } catch (error) {
         done(error);
       }
@@ -74,19 +76,43 @@ class AuthStrategy {
   }
 
   /**
+   * Get Permission of a token
+   * @param perms Array of perms converted
+   */
+  private getPermissions(perms: Array<IRoleModule>): string {
+    const getPermission = (perm: IRoleModule) => {
+      const getTwoFirstsLetters = (word: string) => R.map(
+        (w: string) => w.charAt(0),word.split(' ')
+      ).join();
+      const getAccess = (access: Array<string>) => R.map(getTwoFirstsLetters, access).join('.');
+      const withoutSpaces = (word: string) => word.split(' ').join('_');
+      return getAccess(perm.roleModulePermission) + '-' + withoutSpaces(perm.roleModuleId['moduleName']);
+    };
+    return R.map(getPermission, perms).join(',');
+  }
+
+  /**
    * Gen Token of all user
    * @param ip ip of user
    * @param user name of user
    * @param role role of user
    * @param id id of user
+   * @param perms Permissions of user with token defined
    */
-  private genToken (ip: string, user: string, role: string, id: string) {
+  private genToken (
+    ip: string,
+    user: string,
+    role: string,
+    id: string,
+    perms: Array<IRoleModule>
+  ) {
     const token = jwt.encode({
       exp: moment().utc().add({ hours: 1 }).unix(),
       id,
       username: user,
       ip,
-      role
+      role,
+      permission: this.getPermissions(perms)
     }, config.jwtSecret);
 
     return token;
@@ -104,7 +130,51 @@ class AuthStrategy {
     next: express.NextFunction
   ) {
     passport.authenticate('jwt', async (error, info) => {
-      if (error || !info) { res.status(403).json({ error }); }
+      if (error || !info) { next({ code: 403, error }); }
+      next();
+    })(req, res, next);
+  }
+
+  /**
+   * Authorize access to certain thinkgs
+   * @param req Request of Express
+   * @param res Response of Express
+   * @param next NextFunction of Express
+   * @param module Name of Module
+   * @param permission Permission of Module
+   */
+  public async authorize(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+    module: string,
+    permission: string
+  ) {
+    passport.authenticate('jwt', async (error, info) => {
+      if (error || !info) { next({ code: 403, error }); }
+
+      const getTwoFirstsLetters = (word: string) => R.map(
+        (w: string) => w.charAt(0),word.split(' ')
+      ).join();
+      const compose = (...fns: Array<any>) => (x: any) => fns.reduceRight((y,f) => f(y), x);
+      const verifyModule = (mod: string) => ([_, b]) => b === mod;
+      const separeFor = (separation: string) => (word: string) => word.split(separation);
+
+      let permUser = compose(separeFor(','))(info.permission);
+      permUser = R.map(compose(separeFor('-')), permUser);
+
+      const accessValid = R.filter(verifyModule(module), permUser);
+      if (accessValid.length == 1) {
+        if (R.includes(getTwoFirstsLetters(permission), accessValid[0][0])) {
+          next();
+        } else {
+          //res.status(403).json({ code: 403, message: 'Not Permitted.' });
+          next({ code: 403, message: 'Not Permitted.' });
+        }
+      } else {
+        //res.status(403).json({ code: 403, message: 'Not Permitted.' });
+        next({ code: 403, message: 'Not Permitted.' });
+      }
       next();
     })(req, res, next);
   }
@@ -118,64 +188,62 @@ class AuthStrategy {
   public async login(req: express.Request, res: express.Response, next: express.NextFunction) {
     passport.authenticate('local', { session: false }, async (error, user) => {
       try {
-        // if (error || !user) { res.status(400).json({ error }); }
+        if (error || !user) { next(error); }
 
-        // const options = {
-        //   maxAge: 1000 * 60 * 15, // 15 minutes
-        //   httpOnly: true,
-        //   signed: true// ,
-        //   //secure: true
-        // };
+        const options = {
+          maxAge: 1000 * 60 * 15, // 15 minutes
+          httpOnly: true,
+          signed: true// ,
+          //secure: true
+        };
 
-        // const {
-        //   row
-        // } = await this.sessionService.getSessionComplete(user.sessionId);
+        const { rows } = await this.sessionService.getOne(user.sessionId);
+        const row = rows as ISession;
 
-        // // #TODO: GET User data of service of user sync
+        // #TODO: GET User data of service of user sync
 
-        // const token = this.genToken(
-        //   req.connection.remoteAddress,
-        //   row[0].sessionUserName,
-        //   row[0].sessionRole,
-        //   user.sessionId
-        // );
+        const token = this.genToken(
+          req.connection.remoteAddress,
+          row.sessionUserName,
+          row.sessionRole['_id'],
+          user.sessionId,
+          row.sessionRole['roleModules']
+        );
 
-        // // Create New BlackList
-        // const blackListItem = {
-        //   blackListToken: token,
-        //   blackListIp: req.connection.remoteAddress,
-        //   blackListBrowser: req.headers['user-agent'],
-        //   blackListDateUse: new Date()
-        // };
-        // const blackCreated = await this.blackListService.create(blackListItem);
+        // Create New BlackList
+        const blackListItem = {
+          blackListToken: token,
+          blackListIp: req.connection.remoteAddress,
+          blackListBrowser: req.headers['user-agent'],
+          blackListDateUse: new Date()
+        };
+        const blackCreated = await this.blackListService.create(blackListItem);
 
-        // // load Strategie for Authenticate
-        // const strategieResolve = await this.strategyAuthentication(
-        //   blackListItem.blackListIp,
-        //   user.sessionId,
-        //   blackListItem.blackListBrowser,
-        //   blackCreated,
-        //   row[0].blacklists
-        // );
+        // load Strategie for Authenticate
+        const strategieResolve = await this.strategyAuthentication(
+          blackListItem.blackListIp,
+          user.sessionId,
+          blackListItem.blackListBrowser,
+          blackCreated,
+          row.sessionBlackList
+        );
 
-        // if (strategieResolve.code ===  409) {
-        //   res.status(409).json(strategieResolve);
-        // }
+        if (strategieResolve.code ===  409) {
+          next({ code: 409, message: strategieResolve })
+        }
 
-        // // Append to List the new Item
-        // row[0].blacklists.push(blackListItem);
+        // Append to List the new Item
+        row.sessionBlackList.push(blackListItem as IBlackList);
 
-        // R.forEach((data: any) => delete data.blackListToken, row[0].blacklists);
+        R.forEach((data: any) => delete data._doc.blackListToken, row.sessionBlackList);
 
-        // console.log("token - ", token);
-
-        // res
-        //   .status(200)
-        //   .cookie(config.cookieName, token, options)
-        //   .send({ code: 200, message: 'Data Correctly', data: row[0] });
+        res
+          .status(200)
+          .cookie(config.cookieName, token, options)
+          .send({ code: 200, message: 'Data Correctly', data: row });
       } catch (err) {
         console.log('[Error login] - ', err);
-        res.status(401).json({ "message": "Invalid credentials", "errors": err });
+        next({ code: 401, message: "Invalid credentials", errors: err });
       }
     })(req, res, next);
   }
@@ -217,7 +285,7 @@ class AuthStrategy {
           // #TODO: report ACCESS INTO event
         }
         // Add new BlackList Item
-        //await this.sessionService.reportNewAuth(idSession, newItem.rows.id);
+        await this.sessionService.createBlackListReference(idSession, newItem.rows._id);
         resolve({ code: 200, message: 'token refresh' });
       } catch (err) {
         reject(err);

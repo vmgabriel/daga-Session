@@ -19,7 +19,7 @@ export class BlackListModel extends AbstractModel {
     super();
 
     this.blackListId = joi.string();
-    this.blackListTokenSchema = joi.string().max(100);
+    this.blackListTokenSchema = joi.string();
     this.blackListIpSchema = joi.string().max(50);
     this.blackListDateUse = joi.date();
     this.blackListBrowser = joi.string();

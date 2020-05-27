@@ -1,16 +1,26 @@
-version: "3.3"
+version: "3.4"
 
 services:
   db:
-    image: couchbase:enterprise-6.5.0
-    deploy:
-      replicas: 1
+    image: mongo:4.2.7-bionic
     ports:
-      - 8091:8091
-      - 8092:8092
-      - 8093:8093
-      - 8094:8094
-      - 11210:11210
+      - 27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/config --quiet 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  restore:
+    image: mongo:4.2.7-bionic
+    volumes:
+      - ./migrations:/var/dump
+    links:
+      - db:db
+    command: mongorestore -h db:27017 --gzip --archive=/var/dump/backup.gz --db dbDagaTest
+    depends_on:
+      - "db"
 
   daga-session-service:
     build:
@@ -19,4 +29,4 @@ services:
     ports:
       - 7200:7200
     depends_on:
-      - "db"
+      - "restore"

@@ -9,12 +9,13 @@ import { AbstractModel } from '../models/abstract';
 
 // Validators
 import { validationHandler } from '../utils/validations/validatorHandler';
+import { verifyAuthorization } from '../utils/middlewares/validation';
 
 // Routes
 import { FilterModel } from '../models/filter';
 
 /** Router base Initial Configuration  */
-export abstract class RouteBase {
+export abstract class RouteBase<T> {
   protected filterModel: FilterModel;
 
   /**
@@ -27,8 +28,9 @@ export abstract class RouteBase {
   constructor(
     public router: Router,
     public uri: string,
+    protected modelName: string,
     protected model?: AbstractModel,
-    protected service?: AbstractService
+    protected service?: AbstractService<T>,
   ) {
     this.filterModel = new FilterModel();
   }
@@ -38,7 +40,10 @@ export abstract class RouteBase {
 
   /** Route of get All data */
   protected getall() {
-    this.router.get('', async (req: Request, res: Response, next: NextFunction) => {
+    this.router.get(
+      '',
+      verifyAuthorization(this.modelName, 'show'),
+      async (req: Request, res: Response, next: NextFunction) => {
       try {
         const data = await this.service.getAll();
         res.status(200).send(data);
@@ -53,6 +58,7 @@ export abstract class RouteBase {
     this.router.get(
       '/:id',
       validationHandler({ id: this.model.getIdSchema() }, 'params'),
+      verifyAuthorization(this.modelName, 'show'),
       async (req: Request, res: Response, next: NextFunction) => {
       try {
         const data = await this.service.getOne(req.params.id);
@@ -68,6 +74,7 @@ export abstract class RouteBase {
     this.router.post(
       '/filter',
       validationHandler(this.filterModel.getAttributeAndFilter()),
+      verifyAuthorization(this.modelName, 'show'),
       async (
         req: Request,
         res: Response,
@@ -87,6 +94,7 @@ export abstract class RouteBase {
     this.router.post(
       '',
       validationHandler(this.model.getCreateScheme()),
+      verifyAuthorization(this.modelName, 'create'),
       async (req: Request, res: Response, next: NextFunction) => {
         try {
           const data = await this.service.create(req.body);
@@ -104,6 +112,7 @@ export abstract class RouteBase {
       '/:id',
       validationHandler({ id: this.model.getIdSchema() }, 'params'),
       validationHandler(this.model.getUpdateScheme()),
+      verifyAuthorization(this.modelName, 'update'),
       async (req: Request, res: Response, next: NextFunction) => {
       try {
         const data = await this.service.update(req.params.id, req.body);
@@ -119,6 +128,7 @@ export abstract class RouteBase {
     this.router.delete(
       '/:id',
       validationHandler({ id: this.model.getIdSchema() }, 'params'),
+      verifyAuthorization(this.modelName, 'delete'),
       async (req: Request, res: Response, next: NextFunction) => {
       try {
         const data = await this.service.delete(req.params.id);

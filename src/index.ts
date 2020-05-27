@@ -17,7 +17,7 @@ import config from './config';
 
 // Auth
 import auth from './utils/auth';
-import authClient from './utils/middlewares/validation';
+import { authClient } from './utils/middlewares/validation';
 
 // Verify Connection
 import dbConnect from './utils/db/mongo';
@@ -37,6 +37,7 @@ import {
   clientErrorHandler,
   errorhandler
 } from './utils/middlewares/error-handlers';
+import { IAbstract } from './interfaces/abtract';
 
 
 /** Server Class Init */
@@ -45,11 +46,11 @@ class Server {
   private env: any;
   private corsOptions: cors.CorsOptions;
 
-  private indexRoute: RouteBase;
+  private indexRoute: RouteBase<IAbstract>;
   private loginRoute: AuthRoutes;
 
   // Routes Class
-  private routes: Array<RouteBase>;
+  private routes: Array<RouteBase<IAbstract>>;
 
   constructor() {
     // Create Express Application
@@ -105,7 +106,7 @@ class Server {
     this.app.use(`${this.indexRoute.uri}`, this.indexRoute.router);
     this.app.use(`${this.loginRoute. uri}`, this.loginRoute.router);
 
-    // this.app.use(authClient);
+    this.app.use(authClient);
 
     for (let route of this.routes) {
       this.app.use(`${route.uri}`, route.router);

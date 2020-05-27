@@ -12,15 +12,17 @@ import { ModuleService } from '../services/module';
 
 // Import Model
 import { ModuleModel } from '../models/module';
+import { IModule, nameTable } from "../interfaces/module";
 
 /** Class for modules */
-export class ModuleRoutes extends RouteBase {
+export class ModuleRoutes extends RouteBase<IModule> {
 
   /** Constructor  */
   constructor() {
     super(
       Router(),
       '/api/v0/modules/',
+      nameTable,
       new ModuleModel(),
       new ModuleService()
     );

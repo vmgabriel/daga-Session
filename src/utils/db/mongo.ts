@@ -44,6 +44,7 @@ class MongoConnection {
     }
   }
 
+  /** Disconnect to database  */
   public disconnect(): Promise<any> {
     return new Promise((resolve: any, reject: any) => {
       if (this.isConnected) {

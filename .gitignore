@@ -1,7 +1,4 @@
 
-# Created by https://www.gitignore.io/api/node,emacs,dotenv
-# Edit at https://www.gitignore.io/?templates=node,emacs,dotenv
-
 ### dotenv ###
 .env
 
@@ -160,4 +157,3 @@ typings/
 tmp/
 temp/
 
-# End of https://www.gitignore.io/api/node,emacs,dotenv
