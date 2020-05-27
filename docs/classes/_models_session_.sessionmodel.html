@@ -96,14 +96,19 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_models_session_.sessionmodel.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_models_session_.sessionmodel.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_models_session_.sessionmodel.html#deletedat" class="tsd-kind-icon">deleted<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionblacklistschema" class="tsd-kind-icon">session<wbr>Black<wbr>List<wbr>Schema</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionidschema" class="tsd-kind-icon">session<wbr>IdSchema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionisvalidschema" class="tsd-kind-icon">session<wbr>IsValid<wbr>Schema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionisverifyemailschema" class="tsd-kind-icon">session<wbr>IsVerify<wbr>Email<wbr>Schema</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionpasswordschema" class="tsd-kind-icon">session<wbr>Password<wbr>Schema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionroleschema" class="tsd-kind-icon">session<wbr>Role<wbr>Schema</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_models_session_.sessionmodel.html#sessionusernameschema" class="tsd-kind-icon">session<wbr>User<wbr>Name<wbr>Schema</a></li>
 							</ul>
 						</section>
@@ -111,6 +116,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_models_session_.sessionmodel.html#getcreatescheme" class="tsd-kind-icon">get<wbr>Create<wbr>Scheme</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_models_session_.sessionmodel.html#getdata" class="tsd-kind-icon">get<wbr>Data</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_models_session_.sessionmodel.html#getidschema" class="tsd-kind-icon">get<wbr>IdSchema</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_models_session_.sessionmodel.html#getupdatescheme" class="tsd-kind-icon">get<wbr>Update<wbr>Scheme</a></li>
 							</ul>
@@ -120,17 +126,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Session<wbr>Model<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_session_.sessionmodel.html" class="tsd-signature-type">SessionModel</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in src/models/session.ts:13</li>
+									<li>Defined in src/models/session.ts:20</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_models_session_.sessionmodel.html" class="tsd-signature-type">SessionModel</a></h4>
@@ -138,15 +145,56 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="deletedat" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> deleted<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">deleted<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#deletedat">deletedAt</a></p>
+						<ul>
+							<li>Defined in src/models/abstract.ts:8</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sessionblacklistschema" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>Black<wbr>List<wbr>Schema</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>Black<wbr>List<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/models/session.ts:20</li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="sessionidschema" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>IdSchema</h3>
 					<div class="tsd-signature tsd-kind-icon">session<wbr>IdSchema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/models/session.ts:11</li>
+							<li>Defined in src/models/session.ts:14</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sessionisvalidschema" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>IsValid<wbr>Schema</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>IsValid<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/models/session.ts:19</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sessionisverifyemailschema" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>IsVerify<wbr>Email<wbr>Schema</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>IsVerify<wbr>Email<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/models/session.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -156,7 +204,17 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Password<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/models/session.ts:13</li>
+							<li>Defined in src/models/session.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="sessionroleschema" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> session<wbr>Role<wbr>Schema</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>Role<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/models/session.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +224,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>User<wbr>Name<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/models/session.ts:12</li>
+							<li>Defined in src/models/session.ts:15</li>
 						</ul>
 					</aside>
 				</section>
@@ -184,7 +242,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#getcreatescheme">getCreateScheme</a></p>
 								<ul>
-									<li>Defined in src/models/session.ts:24</li>
+									<li>Defined in src/models/session.ts:39</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -193,6 +251,52 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getdata" class="tsd-anchor"></a>
+					<h3>get<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>deletedAt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionBlackList<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionIsValid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionIsVerifyEmailSchema<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionPassword<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionRole<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionUserName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#getdata">getData</a></p>
+								<ul>
+									<li>Defined in src/models/session.ts:55</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get data of Session</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>deletedAt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionBlackList<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionIsValid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionIsVerifyEmailSchema<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionPassword<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionRole<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>sessionUserName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>deleted<wbr>At<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>Black<wbr>List<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>IsValid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>IsVerify<wbr>Email<wbr>Schema<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>Password<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>Role<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>session<wbr>User<wbr>Name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -207,7 +311,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#getidschema">getIdSchema</a></p>
 								<ul>
-									<li>Defined in src/models/session.ts:40</li>
+									<li>Defined in src/models/session.ts:67</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -230,7 +334,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="_models_abstract_.abstractmodel.html">AbstractModel</a>.<a href="_models_abstract_.abstractmodel.html#getupdatescheme">getUpdateScheme</a></p>
 								<ul>
-									<li>Defined in src/models/session.ts:32</li>
+									<li>Defined in src/models/session.ts:47</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -270,20 +374,38 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="_models_session_.sessionmodel.html" class="tsd-kind-icon">Session<wbr>Model</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_models_session_.sessionmodel.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_models_session_.sessionmodel.html#deletedat" class="tsd-kind-icon">deleted<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_models_session_.sessionmodel.html#sessionblacklistschema" class="tsd-kind-icon">session<wbr>Black<wbr>List<wbr>Schema</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_models_session_.sessionmodel.html#sessionidschema" class="tsd-kind-icon">session<wbr>IdSchema</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_models_session_.sessionmodel.html#sessionisvalidschema" class="tsd-kind-icon">session<wbr>IsValid<wbr>Schema</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_models_session_.sessionmodel.html#sessionisverifyemailschema" class="tsd-kind-icon">session<wbr>IsVerify<wbr>Email<wbr>Schema</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_models_session_.sessionmodel.html#sessionpasswordschema" class="tsd-kind-icon">session<wbr>Password<wbr>Schema</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_models_session_.sessionmodel.html#sessionroleschema" class="tsd-kind-icon">session<wbr>Role<wbr>Schema</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_models_session_.sessionmodel.html#sessionusernameschema" class="tsd-kind-icon">session<wbr>User<wbr>Name<wbr>Schema</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_models_session_.sessionmodel.html#getcreatescheme" class="tsd-kind-icon">get<wbr>Create<wbr>Scheme</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_models_session_.sessionmodel.html#getdata" class="tsd-kind-icon">get<wbr>Data</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="_models_session_.sessionmodel.html#getidschema" class="tsd-kind-icon">get<wbr>IdSchema</a>
@@ -308,17 +430,19 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>

@@ -80,7 +80,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ISession</span>
+						<a href="_interfaces_abtract_.iabstract.html" class="tsd-signature-type">IAbstract</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ISession</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -91,13 +96,17 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="_interfaces_session_.isession.html#_id" class="tsd-kind-icon">_id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_session_.isession.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_session_.isession.html#deletedat" class="tsd-kind-icon">deleted<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_session_.isession.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionblacklist" class="tsd-kind-icon">session<wbr>Black<wbr>List</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionisvalid" class="tsd-kind-icon">session<wbr>IsValid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionisverifyemail" class="tsd-kind-icon">session<wbr>IsVerify<wbr>Email</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionpassword" class="tsd-kind-icon">session<wbr>Password</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionrole" class="tsd-kind-icon">session<wbr>Role</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_session_.isession.html#sessionusername" class="tsd-kind-icon">session<wbr>User<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_interfaces_session_.isession.html#updatedat" class="tsd-kind-icon">updated<wbr>At</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,23 +114,57 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="sessionblacklist" class="tsd-anchor"></a>
-					<h3>session<wbr>Black<wbr>List</h3>
-					<div class="tsd-signature tsd-kind-icon">session<wbr>Black<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_interfaces_blacklist_.iblacklist.html" class="tsd-signature-type">IBlackList</a><span class="tsd-signature-symbol">&gt;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+					<a name="_id" class="tsd-anchor"></a>
+					<h3>_id</h3>
+					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Overrides <a href="_interfaces_abtract_.iabstract.html">IAbstract</a>.<a href="_interfaces_abtract_.iabstract.html#_id">_id</a></p>
 						<ul>
-							<li>Defined in src/interfaces/session.ts:15</li>
+							<li>Defined in src/interfaces/session.ts:21</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="createdat" class="tsd-anchor"></a>
+					<h3>created<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">created<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_abtract_.iabstract.html">IAbstract</a>.<a href="_interfaces_abtract_.iabstract.html#createdat">createdAt</a></p>
+						<ul>
+							<li>Defined in src/interfaces/abtract.ts:7</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="deletedat" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> deleted<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">deleted<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_abtract_.iabstract.html">IAbstract</a>.<a href="_interfaces_abtract_.iabstract.html#deletedat">deletedAt</a></p>
+						<ul>
+							<li>Defined in src/interfaces/abtract.ts:9</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_abtract_.iabstract.html">IAbstract</a>.<a href="_interfaces_abtract_.iabstract.html#id">id</a></p>
+						<ul>
+							<li>Defined in src/interfaces/abtract.ts:6</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="sessionid" class="tsd-anchor"></a>
-					<h3>session<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">session<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="sessionblacklist" class="tsd-anchor"></a>
+					<h3>session<wbr>Black<wbr>List</h3>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>Black<wbr>List<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="_interfaces_blacklist_.iblacklist.html" class="tsd-signature-type">IBlackList</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:9</li>
+							<li>Defined in src/interfaces/session.ts:20</li>
 						</ul>
 					</aside>
 				</section>
@@ -131,7 +174,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>IsValid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:14</li>
+							<li>Defined in src/interfaces/session.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -141,7 +184,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>IsVerify<wbr>Email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:13</li>
+							<li>Defined in src/interfaces/session.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -151,17 +194,17 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:11</li>
+							<li>Defined in src/interfaces/session.ts:16</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="sessionrole" class="tsd-anchor"></a>
 					<h3>session<wbr>Role</h3>
-					<div class="tsd-signature tsd-kind-icon">session<wbr>Role<span class="tsd-signature-symbol">:</span> <a href="_interfaces_role_.irole.html" class="tsd-signature-type">IRole</a></div>
+					<div class="tsd-signature tsd-kind-icon">session<wbr>Role<span class="tsd-signature-symbol">:</span> <a href="_interfaces_role_.irole.html" class="tsd-signature-type">IRole</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:12</li>
+							<li>Defined in src/interfaces/session.ts:17</li>
 						</ul>
 					</aside>
 				</section>
@@ -171,7 +214,18 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>User<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/interfaces/session.ts:10</li>
+							<li>Defined in src/interfaces/session.ts:15</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="updatedat" class="tsd-anchor"></a>
+					<h3>updated<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">updated<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_interfaces_abtract_.iabstract.html">IAbstract</a>.<a href="_interfaces_abtract_.iabstract.html#updatedat">updatedAt</a></p>
+						<ul>
+							<li>Defined in src/interfaces/abtract.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -195,11 +249,20 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_interfaces_session_.isession.html" class="tsd-kind-icon">ISession</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_session_.isession.html#sessionblacklist" class="tsd-kind-icon">session<wbr>Black<wbr>List</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+								<a href="_interfaces_session_.isession.html#_id" class="tsd-kind-icon">_id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_session_.isession.html#createdat" class="tsd-kind-icon">created<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_session_.isession.html#deletedat" class="tsd-kind-icon">deleted<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_session_.isession.html#id" class="tsd-kind-icon">id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_interfaces_session_.isession.html#sessionid" class="tsd-kind-icon">session<wbr>Id</a>
+								<a href="_interfaces_session_.isession.html#sessionblacklist" class="tsd-kind-icon">session<wbr>Black<wbr>List</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_interfaces_session_.isession.html#sessionisvalid" class="tsd-kind-icon">session<wbr>IsValid</a>
@@ -216,12 +279,27 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_interfaces_session_.isession.html#sessionusername" class="tsd-kind-icon">session<wbr>User<wbr>Name</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_interfaces_session_.isession.html#updatedat" class="tsd-kind-icon">updated<wbr>At</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="../modules/_interfaces_session_.html#attributeswithoutpass" class="tsd-kind-icon">attributes<wbr>Without<wbr>Pass</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/_interfaces_session_.html#foreignnameblacklist" class="tsd-kind-icon">foreign<wbr>Name<wbr>Black<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/_interfaces_session_.html#foreignnamerole" class="tsd-kind-icon">foreign<wbr>Name<wbr>Role</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/_interfaces_session_.html#nametable" class="tsd-kind-icon">name<wbr>Table</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="../modules/_interfaces_session_.html#statename" class="tsd-kind-icon">state<wbr>Name</a>
 					</li>
 				</ul>
 			</nav>
@@ -239,10 +317,12 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 			</ul>
 		</div>
 	</div>

@@ -62,7 +62,7 @@
 					<a href="_routes_route_.routebase.html">RouteBase</a>
 				</li>
 			</ul>
-			<h1>Class RouteBase</h1>
+			<h1>Class RouteBase&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -75,6 +75,14 @@
 						<p>Router base Initial Configuration</p>
 					</div>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
@@ -113,6 +121,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_routes_route_.routebase.html#filtermodel" class="tsd-kind-icon">filter<wbr>Model</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_routes_route_.routebase.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_routes_route_.routebase.html#modelname" class="tsd-kind-icon">model<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_routes_route_.routebase.html#router" class="tsd-kind-icon">router</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_routes_route_.routebase.html#service" class="tsd-kind-icon">service</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_routes_route_.routebase.html#uri" class="tsd-kind-icon">uri</a></li>
@@ -139,13 +148,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Route<wbr>Base<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, model<span class="tsd-signature-symbol">?: </span><a href="_models_abstract_.abstractmodel.html" class="tsd-signature-type">AbstractModel</a>, service<span class="tsd-signature-symbol">?: </span><a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_routes_route_.routebase.html" class="tsd-signature-type">RouteBase</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Route<wbr>Base<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, modelName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, model<span class="tsd-signature-symbol">?: </span><a href="_models_abstract_.abstractmodel.html" class="tsd-signature-type">AbstractModel</a>, service<span class="tsd-signature-symbol">?: </span><a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_routes_route_.routebase.html" class="tsd-signature-type">RouteBase</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:18</li>
+									<li>Defined in src/routes/route.ts:19</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,6 +181,9 @@
 									</div>
 								</li>
 								<li>
+									<h5>modelName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> model: <a href="_models_abstract_.abstractmodel.html" class="tsd-signature-type">AbstractModel</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
@@ -180,7 +192,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> service: <a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> service: <a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>Service for connect</p>
@@ -201,7 +213,7 @@
 					<div class="tsd-signature tsd-kind-icon">filter<wbr>Model<span class="tsd-signature-symbol">:</span> <a href="_models_filter_.filtermodel.html" class="tsd-signature-type">FilterModel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/routes/route.ts:18</li>
+							<li>Defined in src/routes/route.ts:19</li>
 						</ul>
 					</aside>
 				</section>
@@ -211,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <a href="_models_abstract_.abstractmodel.html" class="tsd-signature-type">AbstractModel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/routes/route.ts:30</li>
+							<li>Defined in src/routes/route.ts:32</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -220,13 +232,23 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="modelname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> model<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">model<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/routes/route.ts:31</li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="router" class="tsd-anchor"></a>
 					<h3>router</h3>
 					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Router</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/routes/route.ts:28</li>
+							<li>Defined in src/routes/route.ts:29</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,10 +260,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="service" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagOptional">Optional</span> service</h3>
-					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a></div>
+					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <a href="_services_abstract_.abstractservice.html" class="tsd-signature-type">AbstractService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/routes/route.ts:31</li>
+							<li>Defined in src/routes/route.ts:33</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +278,7 @@
 					<div class="tsd-signature tsd-kind-icon">uri<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/routes/route.ts:29</li>
+							<li>Defined in src/routes/route.ts:30</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -278,7 +300,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:37</li>
+									<li>Defined in src/routes/route.ts:39</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +322,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:86</li>
+									<li>Defined in src/routes/route.ts:93</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -322,7 +344,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:118</li>
+									<li>Defined in src/routes/route.ts:127</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:67</li>
+									<li>Defined in src/routes/route.ts:73</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -366,7 +388,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:52</li>
+									<li>Defined in src/routes/route.ts:57</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -388,7 +410,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:40</li>
+									<li>Defined in src/routes/route.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -410,7 +432,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/routes/route.ts:102</li>
+									<li>Defined in src/routes/route.ts:110</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -439,7 +461,7 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
+					<li class="current tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="_routes_route_.routebase.html" class="tsd-kind-icon">Route<wbr>Base</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
@@ -450,6 +472,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_routes_route_.routebase.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="_routes_route_.routebase.html#modelname" class="tsd-kind-icon">model<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_routes_route_.routebase.html#router" class="tsd-kind-icon">router</a>
@@ -495,21 +520,23 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>

@@ -107,7 +107,9 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#authenticate" class="tsd-kind-icon">authenticate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#authorize" class="tsd-kind-icon">authorize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#gentoken" class="tsd-kind-icon">gen<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#getpermissions" class="tsd-kind-icon">get<wbr>Permissions</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#initialize" class="tsd-kind-icon">initialize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#login" class="tsd-kind-icon">login</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="_utils_auth_index_.authstrategy.html#strategyauthentication" class="tsd-kind-icon">strategy<wbr>Authentication</a></li>
@@ -128,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:24</li>
+									<li>Defined in src/utils/auth/index.ts:29</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_utils_auth_index_.authstrategy.html" class="tsd-signature-type">AuthStrategy</a></h4>
@@ -144,7 +146,7 @@
 					<div class="tsd-signature tsd-kind-icon">black<wbr>List<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="_services_blacklist_.blacklistservice.html" class="tsd-signature-type">BlackListService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/utils/auth/index.ts:21</li>
+							<li>Defined in src/utils/auth/index.ts:26</li>
 						</ul>
 					</aside>
 				</section>
@@ -154,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">jwt<wbr>Strategy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/utils/auth/index.ts:24</li>
+							<li>Defined in src/utils/auth/index.ts:29</li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">local<wbr>Strategy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/utils/auth/index.ts:23</li>
+							<li>Defined in src/utils/auth/index.ts:28</li>
 						</ul>
 					</aside>
 				</section>
@@ -174,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">session<wbr>Service<span class="tsd-signature-symbol">:</span> <a href="_services_session_.sessionservice.html" class="tsd-signature-type">SessionService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/utils/auth/index.ts:20</li>
+							<li>Defined in src/utils/auth/index.ts:25</li>
 						</ul>
 					</aside>
 				</section>
@@ -191,7 +193,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:101</li>
+									<li>Defined in src/utils/auth/index.ts:127</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -224,17 +226,72 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
-					<a name="gentoken" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> gen<wbr>Token</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">gen<wbr>Token<span class="tsd-signature-symbol">(</span>ip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, user<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, role<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+					<a name="authorize" class="tsd-anchor"></a>
+					<h3>authorize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">authorize<span class="tsd-signature-symbol">(</span>req<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">express.Request</span>, res<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">express.Response</span>, next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">express.NextFunction</span>, module<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, permission<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:83</li>
+									<li>Defined in src/utils/auth/index.ts:146</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authorize access to certain thinkgs</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>req: <span class="tsd-signature-type">express.Request</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Request of Express</p>
+									</div>
+								</li>
+								<li>
+									<h5>res: <span class="tsd-signature-type">express.Response</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Response of Express</p>
+									</div>
+								</li>
+								<li>
+									<h5>next: <span class="tsd-signature-type">express.NextFunction</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>NextFunction of Express</p>
+									</div>
+								</li>
+								<li>
+									<h5>module: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Name of Module</p>
+									</div>
+								</li>
+								<li>
+									<h5>permission: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Permission of Module</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+					<a name="gentoken" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> gen<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">gen<wbr>Token<span class="tsd-signature-symbol">(</span>ip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, user<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, role<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, perms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_role_.irolemodule.html" class="tsd-signature-type">IRoleModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/utils/auth/index.ts:102</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,6 +325,43 @@
 										<p>id of user</p>
 									</div>
 								</li>
+								<li>
+									<h5>perms: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_role_.irolemodule.html" class="tsd-signature-type">IRoleModule</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Permissions of user with token defined</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+					<a name="getpermissions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Permissions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Permissions<span class="tsd-signature-symbol">(</span>perms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_role_.irolemodule.html" class="tsd-signature-type">IRoleModule</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/utils/auth/index.ts:82</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get Permission of a token</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>perms: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_role_.irolemodule.html" class="tsd-signature-type">IRoleModule</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Array of perms converted</p>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
@@ -283,7 +377,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:35</li>
+									<li>Defined in src/utils/auth/index.ts:40</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,7 +399,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:118</li>
+									<li>Defined in src/utils/auth/index.ts:188</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -348,7 +442,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/utils/auth/index.ts:191</li>
+									<li>Defined in src/utils/auth/index.ts:259</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,8 +525,14 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 								<a href="_utils_auth_index_.authstrategy.html#authenticate" class="tsd-kind-icon">authenticate</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+								<a href="_utils_auth_index_.authstrategy.html#authorize" class="tsd-kind-icon">authorize</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
 								<a href="_utils_auth_index_.authstrategy.html#gentoken" class="tsd-kind-icon">gen<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+								<a href="_utils_auth_index_.authstrategy.html#getpermissions" class="tsd-kind-icon">get<wbr>Permissions</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 								<a href="_utils_auth_index_.authstrategy.html#initialize" class="tsd-kind-icon">initialize</a>
@@ -460,21 +560,23 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>
