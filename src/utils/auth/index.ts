@@ -88,7 +88,7 @@ class AuthStrategy {
       const withoutSpaces = (word: string) => word.split(' ').join('_');
       return getAccess(perm.roleModulePermission) + '-' + withoutSpaces(perm.roleModuleId['moduleName']);
     };
-    return R.map(getPermission, perms).join(',');
+    return R.map(getPermission, perms).join('|');
   }
 
   /**
@@ -159,13 +159,21 @@ class AuthStrategy {
       const compose = (...fns: Array<any>) => (x: any) => fns.reduceRight((y,f) => f(y), x);
       const verifyModule = (mod: string) => ([_, b]) => b === mod;
       const separeFor = (separation: string) => (word: string) => word.split(separation);
+      const verifyPermission = (permission: string) => (arr: Array<string>) => {
+        if (arr.length == 0)
+          return false
+        if (arr.length == 1)
+          return arr[0] == permission
+        const [itm, ...nArr] = arr;
+        return itm == permission || verifyPermission(permission)(nArr);
+      };
 
-      let permUser = compose(separeFor(','))(info.permission);
+      let permUser = compose(separeFor('|'))(info.permission);
       permUser = R.map(compose(separeFor('-')), permUser);
 
       const accessValid = R.filter(verifyModule(module), permUser);
       if (accessValid.length == 1) {
-        if (R.includes(getTwoFirstsLetters(permission), accessValid[0][0])) {
+        if (verifyPermission(getTwoFirstsLetters(permission))(accessValid[0][0].split('.'))) {
           next();
         } else {
           //res.status(403).json({ code: 403, message: 'Not Permitted.' });
