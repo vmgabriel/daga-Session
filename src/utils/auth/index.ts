@@ -130,6 +130,7 @@ class AuthStrategy {
     next: express.NextFunction
   ) {
     passport.authenticate('jwt', async (error, info) => {
+      req.headers.info = info;
       if (error || !info) { next({ code: 403, error }); }
       next();
     })(req, res, next);
@@ -151,6 +152,7 @@ class AuthStrategy {
     permission: string
   ) {
     passport.authenticate('jwt', async (error, info) => {
+      console.log('data');
       if (error || !info) { next({ code: 403, error }); return; }
 
       const getTwoFirstsLetters = (word: string) => R.map(

@@ -397,7 +397,7 @@ export class MongoLib<T> {
         query += '} } } }';
         console.log(query);
 
-        const data = this.model.update(
+        const data = this.model.updateMany(
           {_id: idStr},
           JSON.parse(query)
         );

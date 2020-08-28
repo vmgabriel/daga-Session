@@ -6,6 +6,7 @@ import auth from '../utils/auth';
 
 // Validators
 import { validationHandler } from '../utils/validations/validatorHandler';
+import { authClient } from '../utils/middlewares/validation';
 
 // Base router Dependency
 import { RouteBase } from './route';
@@ -13,6 +14,9 @@ import { RouteBase } from './route';
 // Auth Model
 import { SessionModel } from '../models/session';
 import { ISession, nameTable } from "../interfaces/session";
+
+// Services
+import { SessionService } from '../services/session';
 
 /** Route for Auth  */
 export class AuthRoutes extends RouteBase<ISession> {
@@ -26,6 +30,7 @@ export class AuthRoutes extends RouteBase<ISession> {
     );
 
     this.sessionModel = new SessionModel();
+    this.service = new SessionService();
 
     this.config();
   }
@@ -34,6 +39,7 @@ export class AuthRoutes extends RouteBase<ISession> {
   protected config() {
     this.generateLogin();
     this.generateAuth();
+    this.getMe();
   }
 
   /** Route of Login  */
@@ -58,6 +64,28 @@ export class AuthRoutes extends RouteBase<ISession> {
       // if (req.path.includes(process.env.API_BASE + 'login')) return next();
       res.send('ok');
     });
+  }
+
+  /** Route of Login  */
+  public getMe() {
+    this.router.get(
+      '/me',
+      authClient,
+      async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+      ) => {
+        try {
+          const { id } = req.headers.info as any;
+          const { rows } = await this.service.getOne(id as string);
+          res.status(200).send({ code: 200, message: 'Data Correctly', data: rows });
+        } catch(err) {
+          console.log('Error - ', err);
+          next(err);
+        }
+      })
+    ;
   }
 
   // End Class
