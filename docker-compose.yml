@@ -4,7 +4,7 @@ services:
   db:
     image: mongo:4.2.7-bionic
     ports:
-      - 27017
+      - 27017:27017
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/config --quiet 1
       interval: 10s

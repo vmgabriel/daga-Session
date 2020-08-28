@@ -66,7 +66,7 @@ class AuthStrategy {
           sessionPassword: password
         });
 
-        return (valid) ? done(null, { data, sessionId }) : done(data);
+        return (valid) ? done(null, { data, sessionId }) : done({ data, valid });
       } catch (error) {
         done(error);
       }
@@ -151,7 +151,7 @@ class AuthStrategy {
     permission: string
   ) {
     passport.authenticate('jwt', async (error, info) => {
-      if (error || !info) { next({ code: 403, error }); }
+      if (error || !info) { next({ code: 403, error }); return; }
 
       const getTwoFirstsLetters = (word: string) => R.map(
         (w: string) => w.charAt(0),word.split(' ')
@@ -196,7 +196,10 @@ class AuthStrategy {
   public async login(req: express.Request, res: express.Response, next: express.NextFunction) {
     passport.authenticate('local', { session: false }, async (error, user) => {
       try {
-        if (error || !user) { next(error); }
+        if (error || !user) {
+          next({ code: 401, message: error.data, valid: error.valid });
+          return;
+        }
 
         const options = {
           maxAge: 1000 * 60 * 15, // 15 minutes

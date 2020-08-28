@@ -42,9 +42,9 @@ export class AuthRoutes extends RouteBase<ISession> {
       '',
       validationHandler(this.sessionModel.getCreateScheme()),
       (
-      req: Request,
-      res: Response,
-      next: NextFunction
+        req: Request,
+        res: Response,
+        next: NextFunction
       ) => auth.login(req, res, next));
   }
 
