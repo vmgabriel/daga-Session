@@ -36,10 +36,16 @@ class AuthStrategy {
     this.jwtStrategy = passportJWT.Strategy;
   }
 
+  getOnlyToken(withBearer: string) {
+    const re = new RegExp('^(B|b)earer (.*)$');
+    const data = re.exec(withBearer);
+    return data[2];
+  }
+
   /** Initialize the Password  */
   public initialize() {
     passport.use(new this.jwtStrategy({
-      jwtFromRequest: (req: any) => req.signedCookies[config.cookieName],
+      jwtFromRequest: (req: any) => this.getOnlyToken(req.headers.authorization),
       secretOrKey: config.jwtSecret,
     }, (
       jwtPayload: any,
@@ -152,7 +158,6 @@ class AuthStrategy {
     permission: string
   ) {
     passport.authenticate('jwt', async (error, info) => {
-      console.log('data');
       if (error || !info) { next({ code: 403, error }); return; }
 
       const getTwoFirstsLetters = (word: string) => R.map(
@@ -203,13 +208,6 @@ class AuthStrategy {
           return;
         }
 
-        const options = {
-          maxAge: 1000 * 60 * 15, // 15 minutes
-          httpOnly: true,
-          signed: true// ,
-          //secure: true
-        };
-
         const { rows } = await this.sessionService.getOne(user.sessionId);
         const row = rows as ISession;
 
@@ -252,8 +250,7 @@ class AuthStrategy {
 
         res
           .status(200)
-          .cookie(config.cookieName, token, options)
-          .send({ code: 200, message: 'Data Correctly', data: row });
+          .send({ code: 200, message: 'Data Correctly', data: row, token: token });
       } catch (err) {
         console.log('[Error login] - ', err);
         next({ code: 401, message: "Invalid credentials", errors: err });

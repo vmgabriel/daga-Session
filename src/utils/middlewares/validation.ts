@@ -19,10 +19,6 @@ import { IErrorCustom } from '../../interfaces/error-custom';
  * @param next
  */
 export const authClient = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.signedCookies || !req.signedCookies[config.cookieName]) {
-    next({ code: 403, message: 'auth not send', error: 'auth not send' });
-  }
-
   authStrategy.authenticate(req, res, next);
 };
 /**

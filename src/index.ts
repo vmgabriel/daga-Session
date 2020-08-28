@@ -63,7 +63,8 @@ class Server {
     // CoreOptions
     this.corsOptions = {
       origin: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      credentials: true,
     };
 
     // Initialize Routes
